@@ -215,7 +215,7 @@ enum IconType {
  * 
  * @author Sam MacPherson
  */
-class BSIcon extends ESpan {
+class Icon extends ESpan {
 
 	public function new (type:IconType) {
 		super();

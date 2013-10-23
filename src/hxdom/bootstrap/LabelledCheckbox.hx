@@ -8,7 +8,7 @@ import js.html.CharacterData;
  * 
  * @author Sam MacPherson
  */
-class BSLabelledCheckbox extends EDiv {
+class LabelledCheckbox extends EDiv {
 	
 	public var label(default, set):String;
 	public var checkbox(default, null):EInput;

@@ -25,7 +25,7 @@ enum TableEmphasis {
  * 
  * @author Sam MacPherson
  */
-class BSTable extends ETable {
+class Table extends ETable {
 
 	public function new (?opts:Iterable<TableOptions>) {
 		super();
@@ -58,22 +58,22 @@ class BSTable extends ETable {
 		var body = ETableBody.create();
 		var firstRow = true;
 		for (i in data) {
-			var row = BSTableRow.create();
+			var row = TableRow.create();
 			if (firstRow) {
 				for (o in i) row.add(BSTableHeaderCell.create().addText(Std.string(o)));
 				head.add(row);
 				firstRow = false;
 			} else {
-				for (o in i) row.add(BSTableCell.create().addText(Std.string(o)));
+				for (o in i) row.add(TableCell.create().addText(Std.string(o)));
 				body.add(row);
 			}
 		}
-		return BSTable.create(opts).add(head).add(body);
+		return Table.create(opts).add(head).add(body);
 	}
 	
 }
 
-class BSTableRow extends ETableRow {
+class TableRow extends ETableRow {
 	
 	public function new (?emphasis:TableEmphasis) {
 		super();
@@ -107,7 +107,7 @@ class BSTableHeaderCell extends ETableHeaderCell {
 	
 }
 
-class BSTableCell extends ETableCell {
+class TableCell extends ETableCell {
 	
 	public function new (?emphasis:TableEmphasis) {
 		super();
