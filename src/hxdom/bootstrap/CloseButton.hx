@@ -16,7 +16,7 @@ class CloseButton extends EButton {
 		
 		type = "button";
 		classes("close");
-		addText("&times;");
+		addText("×");
 	}
 	
 }

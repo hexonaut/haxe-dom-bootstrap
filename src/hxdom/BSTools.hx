@@ -2,8 +2,11 @@ package hxdom;
 
 import hxdom.bootstrap.Dropdown;
 import hxdom.bootstrap.Icon;
+import hxdom.bootstrap.Modal;
 import hxdom.Elements;
 import js.html.Element;
+import js.html.Event;
+import js.JQuery;
 
 using hxdom.DomTools;
 
@@ -836,6 +839,25 @@ class BSTools {
 		}
 		
 		return e;
+	}
+	
+	/**
+	 * Link a button to a modal popup.
+	 */
+	public static function linkModal<T:Element>(e:T, modal:Modal):T {
+		untyped {
+			//Link DOM element to modal
+			e.__modal = modal;
+		}
+		e.addEventListener("click", _doPopup);
+		
+		return e;
+	}
+	
+	static function _doPopup (e:Event):Void {
+		untyped {
+			e.currentTarget.__modal.setVisible(true);
+		}
 	}
 	
 }

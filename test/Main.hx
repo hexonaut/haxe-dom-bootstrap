@@ -4,6 +4,7 @@ import hxdom.bootstrap.Dropdown;
 import hxdom.bootstrap.DropdownButton;
 import hxdom.bootstrap.Icon;
 import hxdom.bootstrap.LabelledCheckbox;
+import hxdom.bootstrap.Modal;
 import hxdom.bootstrap.Panel;
 import hxdom.bootstrap.ProgressBar;
 import hxdom.bootstrap.Table;
@@ -54,13 +55,20 @@ class Main {
 		panel.body.add(EParagraph.create().addText("Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit."));
 		panel.add(Table.build([["#", "First Name", "Last Name", "Username"], ["1", "Mark", "Otto", "@mdo"], ["2", "Jacob", "Thornton", "@fat"], ["3", "Sam", "MacPherson", "@sgmacpherson"]]));
 		
+		var modal = Modal.create(true);
+		modal.closeable = true;
+		modal.setTitle("A Modal Title!");
+		var modalBtn = EButton.create().button(Primary, Large).addText("Popup!");
+		modalBtn.linkModal(modal);
+		
 		cont.add(ProgressBar.create(5, 10, Danger, Animated));
 		cont.add(col1).add(col2).add(table).add(form);
 		for (i in Type.allEnums(IconType)) {
 			cont.add(Icon.create(i));
 		}
 		cont.add(panel);
-		col1.add(dropdownBtn);
+		col1.add(EDiv.create().add(dropdownBtn));
+		col1.add(modal).add(modalBtn);
 		body.add(nav);
 		body.add(cont);
 	}
