@@ -1,5 +1,7 @@
 package hxdom;
 
+import hxdom.bootstrap.Dropdown;
+import hxdom.bootstrap.Icon;
 import hxdom.Elements;
 import js.html.Element;
 
@@ -61,6 +63,48 @@ enum ImageBorder {
 	Rounded;
 	Circle;
 	Thumbnail;
+}
+
+enum ButtonGroupAlign {
+	Regular;
+	Vertical;
+	Justified;
+}
+
+enum NavStyle {
+	Regular;
+	Tabs;
+	Pills;
+}
+
+enum NavAlign {
+	Regular;
+	Stacked;
+	Justified;
+}
+
+enum NavBarStyle {
+	Default;
+	Inverse;
+}
+
+enum NavBarAlign {
+	Regular;
+	FixedTop;
+	FixedBottom;
+	StaticTop;
+}
+
+enum PaginationSize {
+	Small;
+	Medium;
+	Large;
+}
+
+enum WellSize {
+	Small;
+	Medium;
+	Large;
 }
 
 /**
@@ -251,7 +295,7 @@ class BSTools {
 	public static function inLine<T:Element> (e:T):T {
 		e.classes(switch (e.tagName.toLowerCase()) {
 			case "form": "form-inline";
-			case "ul", "li": "list-inline";
+			case "ul", "ol": "list-inline";
 			case "input":
 				switch (cast(e, EInput).type.toLowerCase()) {
 					case "checkbox": "checkbox-inline";
@@ -348,7 +392,9 @@ class BSTools {
 	 * 		input[button]
 	 * 		a
 	 */
-	public static function button<T:Element> (e:T, type:ButtonType, ?size:ButtonSize):T {
+	public static function button<T:Element> (e:T, ?type:ButtonType, ?size:ButtonSize):T {
+		if (type == null) type = Default;
+		
 		e.classes("btn");
 		e.classes(switch (type) {
 			case Default: "btn-default";
@@ -389,7 +435,7 @@ class BSTools {
 	/**
 	 * Set image border style.
 	 */
-	public static function imageBorder<T:Element> (e:T, border:ImageBorder):T {
+	public static function imageBorder<T:EImage> (e:T, border:ImageBorder):T {
 		e.classes(switch (border) {
 			case Rounded: "img-rounded";
 			case Circle: "img-circle";
@@ -432,6 +478,362 @@ class BSTools {
 			case Medium: "hidden-md";
 			case Large: "hidden-lg";
 		});
+		
+		return e;
+	}
+	
+	/**
+	 * Turn an element into a group of buttons.
+	 */
+	public static function buttonGroup<T:Element>(e:T, ?align:ButtonGroupAlign, ?size:ButtonSize, ?dropup:Bool):T {
+		if (align == null) align = Regular;
+		
+		if (align != null) {
+			e.classes(switch (align) {
+				case Regular: "btn-group";
+				case Vertical: "btn-group-vertical";
+				case Justified: "btn-group btn-group-justified";
+			});
+		}
+		if (size != null) {
+			switch (size) {
+				case ExtraSmall: e.classes("btn-group-xs");
+				case Small: e.classes("btn-group-sm");
+				case Medium:
+				case Large: e.classes("btn-group-lg");
+			};
+		}
+		if (dropup) e.classes("dropup");
+		
+		return e;
+	}
+	
+	/**
+	 * Makes element into a dropdown menu.
+	 */
+	public static function dropdown<T:Element>(e:T):T {
+		e.classes("dropdown");
+		
+		return e;
+	}
+	
+	/**
+	 * Links a button to a toggle the dropdown menu within this button group.
+	 */
+	public static function dropdownButton<T:Element>(e:T):T {
+		e.classes("dropdown-toggle");
+		untyped e.dataset.toggle = "dropdown";
+		
+		return e;
+	}
+	
+	/**
+	 * Turns this span element into a caret character.
+	 */
+	public static function addCaret<T:Element>(e:T):T {
+		e.add(ESpan.create().classes("caret"));
+		
+		return e;
+	}
+	
+	/**
+	 * Float left.
+	 */
+	public static function pullLeft<T:Element>(e:T):T {
+		e.classes("pull-left");
+		
+		return e;
+	}
+	
+	/**
+	 * Float right.
+	 */
+	public static function pullRight<T:Element>(e:T):T {
+		e.classes("pull-right");
+		
+		return e;
+	}
+	
+	/**
+	 * Turn this element into a input group.
+	 */
+	public static function inputGroup<T:Element>(e:T, ?size:InputSize):T {
+		if (size == null) size = Medium;
+		
+		e.classes("input-group");
+		switch (size) {
+			case Small: e.classes("input-group-sm");
+			case Medium: 
+			case Large: e.classes("input-group-lg");
+		}
+		
+		return e;
+	}
+	
+	/**
+	 * Input group addon.
+	 */
+	public static function inputGroupAddon<T:Element>(e:T):T {
+		e.classes("input-group-addon");
+		
+		return e;
+	}
+	
+	/**
+	 * Input group addon.
+	 */
+	public static function inputGroupButtonAddon<T:Element>(e:T):T {
+		e.classes("input-group-btn");
+		
+		return e;
+	}
+	
+	/**
+	 * Create a navigation list.
+	 */
+	public static function nav<T:Element>(e:T, ?style:NavStyle, ?align:NavAlign):T {
+		e.classes("nav");
+		if (style != null) {
+			switch (style) {
+				case Regular:
+				case Tabs: e.classes("nav-tabs");
+				case Pills: e.classes("nav-pills");
+			}
+		}
+		if (align != null) {
+			switch (align) {
+				case Regular:
+				case Stacked: e.classes("nav-stacked");
+				case Justified: e.classes("nav-justified");
+			}
+		}
+		
+		return e;
+	}
+	
+	/**
+	 * Primary navigation.
+	 */
+	public static function navbar<T:ENav>(e:T, ?style:NavBarStyle, ?align:NavBarAlign):T {
+		e.classes("navbar");
+		if (style != null) {
+			e.classes(switch (style) {
+				case Default: "navbar-default";
+				case Inverse: "navbar-inverse";
+			});
+		}
+		if (align != null) {
+			switch (align) {
+				case Regular:
+				case FixedTop: e.classes("navbar-fixed-top");
+				case FixedBottom: e.classes("navbar-fixed-bottom");
+				case StaticTop: e.classes("navbar-static-top");
+			}
+		}
+		
+		return e;
+	}
+	
+	/**
+	 * The website brand.
+	 */
+	public static function brand<T:Element>(e:T):T {
+		e.classes("navbar-brand");
+		
+		return e;
+	}
+	
+	/**
+	 * Add navbar specific classes to the element. Varies based on element type.
+	 * 
+	 * Valid for:
+	 * 		button
+	 * 		input[submit]
+	 * 		input[button]
+	 * 		a
+	 * 		ul
+	 * 		ol
+	 * 		p
+	 * 		span
+	 */
+	public static function navbarElement<T:Element>(e:T):T {
+		e.classes(switch (e.tagName.toLowerCase()) {
+			case "form": "navbar-form";
+			case "ul", "ol": "navbar-nav";
+			case "button": "navbar-btn";
+			case "a": "navbar-link";
+			case "p", "span": "navbar-text";
+			case "input":
+				switch (cast(e, EInput).type.toLowerCase()) {
+					case "submit", "button": "navbar-btn";
+					default: throw "Navbar element not defined for this type of input.";
+				}
+			default: throw "Navbar element not defined for this element.";
+		});
+		
+		return e;
+	}
+	
+	/**
+	 * Navbar float left.
+	 */
+	public static function navbarLeft<T:Element>(e:T):T {
+		e.classes("navbar-left");
+		
+		return e;
+	}
+	
+	/**
+	 * Navbar float right.
+	 */
+	public static function navbarRight<T:Element>(e:T):T {
+		e.classes("navbar-right");
+		
+		return e;
+	}
+	
+	/**
+	 * Add an icon to an element.
+	 */
+	public static function addIcon<T:Element>(e:T, type:IconType):T {
+		e.add(Icon.create(type));
+		
+		return e;
+	}
+	
+	/**
+	 * Turn a list into breadcrumbs.
+	 * 
+	 * Valid for:
+	 * 		ul
+	 * 		ol
+	 */
+	public static function breadcrumbs<T:Element>(e:T):T {
+		e.classes("breadcrumb");
+		
+		return e;
+	}
+	
+	/**
+	 * The active element in a list.
+	 */
+	public static function active<T:EListItem>(e:T):T {
+		e.classes("active");
+		
+		return e;
+	}
+	
+	/**
+	 * Disable an element. Behaviour varies depending on the element.
+	 */
+	public static function disabled<T:Element>(e:T):T {
+		switch (e.tagName.toLowerCase()) {
+			case "button", "command", "fieldset", "input", "keygen", "optgroup", "option", "select", "textarea": e.unsafeAttr(hxdom.Attr.disabled, true);
+			default: e.classes("disabled");
+		}
+		
+		return e;
+	}
+	
+	/**
+	 * Turn a list into pagination.
+	 * 
+	 * Valid for:
+	 * 		ul
+	 * 		ol
+	 */
+	public static function pagination<T:Element>(e:T, ?size:PaginationSize):T {
+		e.classes("pagination");
+		if (size != null) {
+			switch (size) {
+				case Small: e.classes("pagination-sm");
+				case Medium: 
+				case Large: e.classes("pagination-lg");
+			}
+		}
+		
+		return e;
+	}
+	
+	/**
+	 * Turns a list into a pager.
+	 * 
+	 * Valid for:
+	 * 		ul
+	 * 		ol
+	 */
+	public static function pager<T:Element>(e:T):T {
+		e.classes("pager");
+		
+		return e;
+	}
+	
+	/**
+	 * The previous link in a pager.
+	 */
+	public static function previous<T:EListItem>(e:T):T {
+		e.classes("previous");
+		
+		return e;
+	}
+	
+	/**
+	 * The next link in a pager.
+	 */
+	public static function next<T:EListItem>(e:T):T {
+		e.classes("next");
+		
+		return e;
+	}
+	
+	/**
+	 * Call extra attention to this element by making it HUGE.
+	 */
+	public static function jumbotron<T:Element>(e:T):T {
+		e.classes("jumbotron");
+		
+		return e;
+	}
+	
+	/**
+	 * Often used on the title of an article or page.
+	 */
+	public static function pageHeader<T:Element>(e:T):T {
+		e.classes("page-header");
+		
+		return e;
+	}
+	
+	/**
+	 * Turn an element into a thumbnail.
+	 */
+	public static function thumbnail<T:Element>(e:T):T {
+		e.classes("thumbnail");
+		
+		return e;
+	}
+	
+	/**
+	 * Match the color of the parent alert container.
+	 */
+	public static function alertLink<T:EAnchor>(e:T):T {
+		e.classes("alert-link");
+		
+		return e;
+	}
+	
+	/**
+	 * Put the element in a well.
+	 */
+	public static function well<T:Element>(e:T, ?size:WellSize):T {
+		e.classes("well");
+		if (size != null) {
+			switch (size) {
+				case Small: e.classes("well-sm");
+				case Medium:
+				case Large: e.classes("well-lg");
+			}
+		}
 		
 		return e;
 	}

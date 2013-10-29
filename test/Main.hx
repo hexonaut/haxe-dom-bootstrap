@@ -1,7 +1,11 @@
 package ;
 
+import hxdom.bootstrap.Dropdown;
+import hxdom.bootstrap.DropdownButton;
 import hxdom.bootstrap.Icon;
 import hxdom.bootstrap.LabelledCheckbox;
+import hxdom.bootstrap.Panel;
+import hxdom.bootstrap.ProgressBar;
 import hxdom.bootstrap.Table;
 import hxdom.Elements;
 import js.Browser;
@@ -20,7 +24,12 @@ class Main {
 	static function main () {
 		var body = Browser.document.body;
 		
+		var nav = ENav.create().navbar(Inverse, StaticTop).add(EAnchor.create().brand().addText("Brand Text").attr(href, "#"));
+		nav.add(EForm.create().navbarElement().add(EDiv.create().formGroup().add(EInput.create(Search).formControl())).add(EButton.create().button().addIcon(Search)));
+		
 		var cont = EDiv.create().container();
+		
+		cont.add(EUnorderedList.create().breadcrumbs().add(EListItem.create().addText("Main Page")).add(EListItem.create().addText("Secondary Page")).add(EListItem.create().addText("Active Page").active()));
 		
 		var col1 = EDiv.create().md(4).add(EHeader1.create().setText("Col 1"))
 		.add(EParagraph.create().textAlign(Right).lead().addText("Lorem ipsum dolor sit amet, consectetur adipiscing elit."))
@@ -37,10 +46,22 @@ class Main {
 		.add(LabelledCheckbox.create("An unchecked checkbox"))
 		;
 		
+		var dropdownBtn = DropdownButton.create("Dropdown Btn", Primary);
+		dropdownBtn.dropdown.addHeader("Header 1").addLink("#", "Link 1").addLink("#", "Link 2").addDivider().addHeader("Header 2").addLink("#", "Link 3").addLink("#", "Link 4");
+		
+		var panel = Panel.create(Primary);
+		panel.setTitle("A table inside a panel with a header!");
+		panel.body.add(EParagraph.create().addText("Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit."));
+		panel.add(Table.build([["#", "First Name", "Last Name", "Username"], ["1", "Mark", "Otto", "@mdo"], ["2", "Jacob", "Thornton", "@fat"], ["3", "Sam", "MacPherson", "@sgmacpherson"]]));
+		
+		cont.add(ProgressBar.create(5, 10, Danger, Animated));
 		cont.add(col1).add(col2).add(table).add(form);
 		for (i in Type.allEnums(IconType)) {
 			cont.add(Icon.create(i));
 		}
+		cont.add(panel);
+		col1.add(dropdownBtn);
+		body.add(nav);
 		body.add(cont);
 	}
 	
