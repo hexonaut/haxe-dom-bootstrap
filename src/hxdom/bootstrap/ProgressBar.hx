@@ -65,9 +65,11 @@ class ProgressBar extends EDiv {
 	}
 	
 	function refresh ():Void {
-		var w = value / max;
-		
-		ebar.style.width = (w*100) + "%";
+		if (value != null && max != null) {
+			var w = value / max;
+			
+			ebar.style.width = (w * 100) + "%";
+		}
 	}
 	
 	function set_value (value:Float):Float {

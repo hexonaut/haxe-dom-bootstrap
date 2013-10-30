@@ -1,9 +1,8 @@
 package hxdom.bootstrap;
 
 import hxdom.Elements;
-import js.html.Element;
-import js.html.Event;
-import js.JQuery;
+import hxdom.html.Element;
+import hxdom.html.Event;
 
 using hxdom.BSTools;
 using hxdom.DomTools;
@@ -41,7 +40,7 @@ class TabbedPane extends EDiv {
 	}
 	
 	function set_panes (panes:Array<TabPane>):Array<TabPane> {
-		for (i in enav.children) {
+		for (i in enav.childNodes) {
 			i.firstChild.removeEventListener("click", onTabSelected);
 		}
 		enav.clear();
@@ -62,10 +61,10 @@ class TabbedPane extends EDiv {
 	}
 	
 	public function clearActive ():Void {
-		for (i in enav.children) {
+		for (i in enav.childNodes) {
 			cast(i, Element).removeClasses("active");
 		}
-		for (i in econtent.children) {
+		for (i in econtent.childNodes) {
 			cast(i, Element).removeClasses("active");
 		}
 	}
@@ -73,8 +72,8 @@ class TabbedPane extends EDiv {
 	public function setActive (index:Int):Void {
 		clearActive();
 		
-		cast(enav.children[index], Element).classes("active");
-		cast(econtent.children[index], Element).classes("active");
+		cast(enav.childNodes[index], Element).classes("active");
+		cast(econtent.childNodes[index], Element).classes("active");
 	}
 	
 	function onTabSelected (e:Event):Void {

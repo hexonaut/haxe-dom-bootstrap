@@ -1,7 +1,6 @@
 package hxdom.bootstrap;
 
 import hxdom.Elements;
-import js.JQuery;
 
 using hxdom.DomTools;
 
@@ -102,7 +101,19 @@ class Modal extends EDiv {
 	}
 	
 	public function setVisible (bool:Bool):Void {
-		untyped new JQuery(this).modal(bool ? "show" : "hide");
+		#if js
+		//Using JQuery to perform fade effect -- maybe consider dropping this
+		untyped new js.JQuery(this).modal(bool ? "show" : "hide");
+		#else
+		//Otherwise just set the classes properly
+		if (bool) {
+			this.style.display = "block";
+			if (fade) classes("fade in");
+		} else {
+			this.style.display = "none";
+			if (fade) removeClasses("fade in");
+		}
+		#end
 	}
 	
 }

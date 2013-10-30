@@ -4,13 +4,13 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\client.js" />
+    <movie path="bin\bs.n" />
     <movie fps="0" />
     <movie width="0" />
     <movie height="0" />
     <movie version="1" />
     <movie minorVersion="0" />
-    <movie platform="JavaScript" />
+    <movie platform="Neko" />
     <movie background="#FFFFFF" />
     <movie preferredSDK="Haxe 3.0.0;3.0.0;" />
   </output>
@@ -40,7 +40,7 @@
     <!-- example: <hidden path="..." /> -->
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>C:\Motion-Twin\haxe-3.0\haxe js.hxml</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->

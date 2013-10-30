@@ -1,7 +1,7 @@
 package hxdom.bootstrap;
 
 import hxdom.Elements;
-import js.html.Element;
+import hxdom.html.Element;
 
 using hxdom.DomTools;
 

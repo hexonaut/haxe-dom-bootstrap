@@ -10,7 +10,6 @@ import hxdom.bootstrap.ProgressBar;
 import hxdom.bootstrap.TabbedPane;
 import hxdom.bootstrap.Table;
 import hxdom.Elements;
-import js.Browser;
 
 using hxdom.BSTools;
 using hxdom.DomTools;
@@ -24,8 +23,9 @@ using hxdom.DomTools;
 class Main {
 	
 	static function main () {
-		var body = Browser.document.body;
-		
+		#if js
+		hxdom.js.Boot.init();
+		#else
 		var nav = ENav.create().navbar(Inverse, StaticTop).add(EAnchor.create().brand().addText("Brand Text").attr(href, "#"));
 		nav.add(EForm.create().navbarElement().add(EDiv.create().formGroup().add(EInput.create(Search).formControl())).add(EButton.create().button().addIcon(Search)));
 		
@@ -79,8 +79,25 @@ class Main {
 		cont.add(tabs);
 		col1.add(EDiv.create().add(dropdownBtn));
 		col1.add(modal).add(modalBtn);
+		
+		var html = EHtml.create();
+		html.attr(lang, "en");
+		var head = EHead.create();
+		head.add(EMeta.create().unsafeAttr(charset, "utf-8"));
+		head.add(ELink.create().attr(rel, "stylesheet").attr(href, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"));
+		head.add(ELink.create().attr(rel, "stylesheet").attr(href, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css"));
+		head.add(EScript.create().addText("HTMLDetailsElement = HTMLElement;"));
+		head.add(EScript.create().attr(src, "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js").attr(defer, true));
+		head.add(EScript.create().attr(src, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js").attr(defer, true));
+		head.add(EScript.create().attr(src, "client.js").attr(defer, true));
+		var body = EBody.create();
 		body.add(nav);
 		body.add(cont);
+		
+		html.add(head).add(body);
+		
+		sys.io.File.saveContent("index.html", hxdom.HTMLSerializer.run(html));
+		#end
 	}
 	
 }

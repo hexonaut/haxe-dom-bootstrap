@@ -1,7 +1,7 @@
 package hxdom.bootstrap;
 
 import hxdom.Elements;
-import js.html.CharacterData;
+import hxdom.html.CharacterData;
 
 /**
  * Easy access to a labelled checkbox which is the most common usage.

@@ -2,8 +2,8 @@ package hxdom.bootstrap;
 
 import hxdom.Elements;
 import hxdom.BSTools;
-import js.html.Element;
-import js.html.Node;
+import hxdom.html.Element;
+import hxdom.html.Node;
 
 using hxdom.DomTools;
 using hxdom.BSTools;

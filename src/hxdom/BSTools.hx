@@ -4,9 +4,8 @@ import hxdom.bootstrap.Dropdown;
 import hxdom.bootstrap.Icon;
 import hxdom.bootstrap.Modal;
 import hxdom.Elements;
-import js.html.Element;
-import js.html.Event;
-import js.JQuery;
+import hxdom.html.Element;
+import hxdom.html.Event;
 
 using hxdom.DomTools;
 
@@ -849,7 +848,12 @@ class BSTools {
 			//Link DOM element to modal
 			e.__modal = modal;
 		}
+		//Weird typing error with macro -- just use the serializable version for non-js
+		#if js
 		e.addEventListener("click", _doPopup);
+		#else
+		e.__addEventListener("hxdom.BSTools", "click", "_doPopup");
+		#end
 		
 		return e;
 	}
