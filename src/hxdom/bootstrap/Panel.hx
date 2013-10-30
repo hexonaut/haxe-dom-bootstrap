@@ -14,16 +14,15 @@ enum PanelType {
 }
 
 /**
- * Provides simple borders, padding, header and footer. By default only the body element is set.
- * If you want a header or a footer then you need to set the appropriate property.
+ * Provides simple borders, padding, header and footer. Header/footer will only be added if you access them.
  * 
  * @author Sam MacPherson
  */
 class Panel extends EDiv {
 	
-	public var header(default, set):Null<EDiv>;
+	public var header(get, null):EDiv;
 	public var body(default, null):EDiv;
-	public var footer(default, set):Null<EDiv>;
+	public var footer(get, null):EDiv;
 
 	public function new (?type:PanelType) {
 		super();
@@ -45,31 +44,22 @@ class Panel extends EDiv {
 		add(body);
 	}
 	
-	/**
-	 * Set the header to contain a single title.
-	 */
-	public function setTitle (title:String):Void {
-		header = EDiv.create().add(EHeader3.create().classes("panel-title").addText(title));
-	}
-	
-	function set_header (header:EDiv):EDiv {
-		if (this.header != null) removeChild(this.header);
-		
-		this.header = header;
-		
-		header.classes("panel-heading");
-		this.insertBefore(header, body);
+	function get_header ():EDiv {
+		if (header == null) {
+			header = EDiv.create();
+			header.classes("panel-heading");
+			insertBefore(header, body);
+		}
 		
 		return header;
 	}
 	
-	function set_footer (footer:EDiv):EDiv {
-		if (this.footer != null) removeChild(this.footer);
-		
-		this.footer = footer;
-		
-		footer.classes("panel-footer");
-		appendChild(footer);
+	function get_footer ():EDiv {
+		if (footer == null) {
+			footer = EDiv.create();
+			footer.classes("panel-footer");
+			add(footer);
+		}
 		
 		return footer;
 	}

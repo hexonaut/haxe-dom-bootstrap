@@ -7,6 +7,7 @@ import hxdom.bootstrap.LabelledCheckbox;
 import hxdom.bootstrap.Modal;
 import hxdom.bootstrap.Panel;
 import hxdom.bootstrap.ProgressBar;
+import hxdom.bootstrap.TabbedPane;
 import hxdom.bootstrap.Table;
 import hxdom.Elements;
 import js.Browser;
@@ -51,15 +52,23 @@ class Main {
 		dropdownBtn.dropdown.addHeader("Header 1").addLink("#", "Link 1").addLink("#", "Link 2").addDivider().addHeader("Header 2").addLink("#", "Link 3").addLink("#", "Link 4");
 		
 		var panel = Panel.create(Primary);
-		panel.setTitle("A table inside a panel with a header!");
+		panel.header.add(EHeader3.create().classes("panel-title").addText("A table inside a panel with a header!"));
 		panel.body.add(EParagraph.create().addText("Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit."));
 		panel.add(Table.build([["#", "First Name", "Last Name", "Username"], ["1", "Mark", "Otto", "@mdo"], ["2", "Jacob", "Thornton", "@fat"], ["3", "Sam", "MacPherson", "@sgmacpherson"]]));
 		
-		var modal = Modal.create(true);
+		var modal = Modal.create();
 		modal.closeable = true;
-		modal.setTitle("A Modal Title!");
+		modal.header.add(EHeader4.create().addText("Modal Title"));
+		modal.body.add(EParagraph.create().addText("Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus. In nisi odio, eleifend in vulputate aliquam, accumsan eget nisi."));
 		var modalBtn = EButton.create().button(Primary, Large).addText("Popup!");
 		modalBtn.linkModal(modal);
+		
+		var tabs = TabbedPane.create([
+		{label:"Tab 1", content:EParagraph.create().addText("Tab Content 1. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") },
+		{label:"Tab 2", content:EParagraph.create().addText("Tab Content 2. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") },
+		{label:"Tab 3", content:EParagraph.create().addText("Tab Content 3. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") }
+		]);
+		tabs.setActive(0);
 		
 		cont.add(ProgressBar.create(5, 10, Danger, Animated));
 		cont.add(col1).add(col2).add(table).add(form);
@@ -67,6 +76,7 @@ class Main {
 			cont.add(Icon.create(i));
 		}
 		cont.add(panel);
+		cont.add(tabs);
 		col1.add(EDiv.create().add(dropdownBtn));
 		col1.add(modal).add(modalBtn);
 		body.add(nav);
