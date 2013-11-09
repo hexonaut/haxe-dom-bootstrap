@@ -1,7 +1,0 @@
-<project name="hxdom-bootstrap" url="https://github.com/Blank101/haxe-dom-bootstrap" license="MIT">
-	<user name="Blank101"/>
-    <tag v="cross"/>
-	<description>haxe-dom-bootstrap provides type safe usage of Twitter Bootstrap components with haxe-dom (my other cross-platform DOM implementation). Start extending these components to build advanced applications!</description>
-	<depends name="hxdom" version="0.1" />
-	<version name="0.1">Initial</version>
-</project>

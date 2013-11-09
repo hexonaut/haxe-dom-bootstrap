@@ -24,7 +24,7 @@ class Main {
 	
 	static function main () {
 		#if js
-		hxdom.js.Boot.init();
+		var html = hxdom.js.Boot.init();
 		#else
 		var nav = ENav.create().navbar(Inverse, StaticTop).add(EAnchor.create().brand().addText("Brand Text").attr(href, "#"));
 		nav.add(EForm.create().navbarElement().add(EDiv.create().formGroup().add(EInput.create(Search).formControl())).add(EButton.create().button().addIcon(Search)));
