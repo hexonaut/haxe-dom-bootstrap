@@ -97,14 +97,7 @@ class Main {
 		html.add(head).add(body);
 		
 		#if benchmark
-		haxe.Serializer.USE_CACHE = true;
 		var mark = haxe.Timer.stamp();
-		for (i in 0 ... 10) {
-			haxe.Serializer.run(html);
-		}
-		neko.Lib.println('Serialize (haxe.Serializer): ${Math.round((haxe.Timer.stamp() - mark)*1000/10)} ms');
-		
-		mark = haxe.Timer.stamp();
 		for (i in 0 ... 100) {
 			hxdom.HTMLSerializer.run(html);
 		}
