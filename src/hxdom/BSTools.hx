@@ -16,6 +16,7 @@ import hxdom.bootstrap.Modal;
 import hxdom.Elements;
 import hxdom.html.Element;
 import hxdom.html.Event;
+import hxdom.html.Node;
 
 using hxdom.DomTools;
 
@@ -129,7 +130,7 @@ class BSTools {
 	/**
 	 * Make this element into a container.
 	 */
-	public static function container<T:Element> (e:T):T {
+	public static function container<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("container");
 		
 		return e;
@@ -138,7 +139,7 @@ class BSTools {
 	/**
 	 * Make this element into a grid row.
 	 */
-	public static function row<T:Element> (e:T):T {
+	public static function row<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("row");
 		
 		return e;
@@ -147,7 +148,7 @@ class BSTools {
 	/**
 	 * Extra small column.
 	 */
-	public static function xs<T:Element> (e:T, cols:Int):T {
+	public static function xs<T:VirtualNode<Dynamic>> (e:T, cols:Int):T {
 		e.classes("col-xs-" + cols);
 		
 		return e;
@@ -156,7 +157,7 @@ class BSTools {
 	/**
 	 * Small column.
 	 */
-	public static function sm<T:Element> (e:T, cols:Int):T {
+	public static function sm<T:VirtualNode<Dynamic>> (e:T, cols:Int):T {
 		e.classes("col-sm-" + cols);
 		
 		return e;
@@ -165,7 +166,7 @@ class BSTools {
 	/**
 	 * Medium column.
 	 */
-	public static function md<T:Element> (e:T, cols:Int):T {
+	public static function md<T:VirtualNode<Dynamic>> (e:T, cols:Int):T {
 		e.classes("col-md-" + cols);
 		
 		return e;
@@ -174,7 +175,7 @@ class BSTools {
 	/**
 	 * Large column.
 	 */
-	public static function lg<T:Element> (e:T, cols:Int):T {
+	public static function lg<T:VirtualNode<Dynamic>> (e:T, cols:Int):T {
 		e.classes("col-lg-" + cols);
 		
 		return e;
@@ -183,7 +184,7 @@ class BSTools {
 	/**
 	 * Extra small column offset.
 	 */
-	public static function xsoff<T:Element> (e:T, cols:Int):T {
+	public static function xsoff<T:VirtualNode<Dynamic>> (e:T, cols:Int):T {
 		e.classes("col-xs-offset-" + cols);
 		
 		return e;
@@ -192,7 +193,7 @@ class BSTools {
 	/**
 	 * Small column offset.
 	 */
-	public static function smoff<T:Element> (e:T, cols:Int):T {
+	public static function smoff<T:VirtualNode<Dynamic>> (e:T, cols:Int):T {
 		e.classes("col-sm-offset-" + cols);
 		
 		return e;
@@ -201,7 +202,7 @@ class BSTools {
 	/**
 	 * Medium column offset.
 	 */
-	public static function mdoff<T:Element> (e:T, cols:Int):T {
+	public static function mdoff<T:VirtualNode<Dynamic>> (e:T, cols:Int):T {
 		e.classes("col-md-offset-" + cols);
 		
 		return e;
@@ -210,7 +211,7 @@ class BSTools {
 	/**
 	 * Large column offset.
 	 */
-	public static function lgoff<T:Element> (e:T, cols:Int):T {
+	public static function lgoff<T:VirtualNode<Dynamic>> (e:T, cols:Int):T {
 		e.classes("col-lg-offset-" + cols);
 		
 		return e;
@@ -228,7 +229,7 @@ class BSTools {
 	/**
 	 * Text align.
 	 */
-	public static function textAlign<T:Element> (e:T, align:TextAlign):T {
+	public static function textAlign<T:VirtualNode<Dynamic>> (e:T, align:TextAlign):T {
 		e.classes(switch (align) {
 			case Left: "text-left";
 			case Center: "text-center";
@@ -241,7 +242,7 @@ class BSTools {
 	/**
 	 * Apply different colors to text for emphasis.
 	 */
-	public static function emphasis<T:Element> (e:T, type:TextEmphasis):T {
+	public static function emphasis<T:VirtualNode<Dynamic>> (e:T, type:TextEmphasis):T {
 		e.classes(switch (type) {
 			case Muted: "text-muted";
 			case Primary: "text-primary";
@@ -266,7 +267,7 @@ class BSTools {
 	/**
 	 * Remove default styling from a list.
 	 */
-	public static function unstyled<T:Element> (e:T):T {
+	public static function unstyled<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("list-unstyled");
 		
 		return e;
@@ -279,8 +280,8 @@ class BSTools {
 	 * 		dl
 	 * 		form
 	 */
-	public static function horizontal<T:Element> (e:T):T {
-		e.classes(e.tagName.toLowerCase() + "-horizontal");
+	public static function horizontal<T:VirtualNode<Dynamic>> (e:T):T {
+		e.classes(e.node.tagName.toLowerCase() + "-horizontal");
 		
 		return e;
 	}
@@ -304,12 +305,12 @@ class BSTools {
 	 * 		input[checkbox]
 	 * 		input[radio]
 	 */
-	public static function inLine<T:Element> (e:T):T {
-		e.classes(switch (e.tagName.toLowerCase()) {
+	public static function inLine<T:VirtualNode<Dynamic>> (e:T):T {
+		e.classes(switch (e.node.tagName.toLowerCase()) {
 			case "form": "form-inline";
 			case "ul", "ol": "list-inline";
 			case "input":
-				switch (cast(e, EInput).type.toLowerCase()) {
+				switch (cast(e, EInput).node.type.toLowerCase()) {
 					case "checkbox": "checkbox-inline";
 					case "radio": "radio-inline";
 					default: throw "Inline not defined for this type of input.";
@@ -323,7 +324,7 @@ class BSTools {
 	/**
 	 * Group multiple elements into one form item.
 	 */
-	public static function formGroup<T:Element> (e:T):T {
+	public static function formGroup<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("form-group");
 		
 		return e;
@@ -332,7 +333,7 @@ class BSTools {
 	/**
 	 * Makes a form element stretch to 100% width.
 	 */
-	public static function formControl<T:Element> (e:T):T {
+	public static function formControl<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("form-control");
 		
 		return e;
@@ -350,7 +351,7 @@ class BSTools {
 	/**
 	 * A help block.
 	 */
-	public static function help<T:Element> (e:T):T {
+	public static function help<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("help-block");
 		
 		return e;
@@ -360,7 +361,7 @@ class BSTools {
 	 * Make this element only applicable to screen readers.
 	 * Does not display.
 	 */
-	public static function screenReaderOnly<T:Element> (e:T):T {
+	public static function screenReaderOnly<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("sr-only");
 		
 		return e;
@@ -370,7 +371,7 @@ class BSTools {
 	 * Set this element and all descendants to show the given validation state.
 	 * Will remove any previous validation states.
 	 */
-	public static function validation<T:Element> (e:T, state:ValidationState):T {
+	public static function validation<T:VirtualNode<Dynamic>> (e:T, state:ValidationState):T {
 		e.removeClasses("has-success has-warning has-error");
 		switch (state) {
 			case Regular:
@@ -385,7 +386,7 @@ class BSTools {
 	/**
 	 * Set the size of the input.
 	 */
-	public static function inputSize<T:Element> (e:T, size:InputSize):T {
+	public static function inputSize<T:VirtualNode<Dynamic>> (e:T, size:InputSize):T {
 		switch (size) {
 			case Small: e.classes("input-sm");
 			case Medium:
@@ -404,7 +405,7 @@ class BSTools {
 	 * 		input[button]
 	 * 		a
 	 */
-	public static function button<T:Element> (e:T, ?type:ButtonType, ?size:ButtonSize):T {
+	public static function button<T:VirtualNode<Dynamic>> (e:T, ?type:ButtonType, ?size:ButtonSize):T {
 		if (type == null) type = Default;
 		
 		e.classes("btn");
@@ -438,7 +439,7 @@ class BSTools {
 	 * 		input[button]
 	 * 		a
 	 */
-	public static function block<T:Element> (e:T):T {
+	public static function block<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("btn-block");
 		
 		return e;
@@ -460,7 +461,7 @@ class BSTools {
 	/**
 	 * Set image border style.
 	 */
-	public static function clearfix<T:Element> (e:T):T {
+	public static function clearfix<T:VirtualNode<Dynamic>> (e:T):T {
 		e.classes("clearfix");
 		
 		return e;
@@ -469,7 +470,7 @@ class BSTools {
 	/**
 	 * Set image border style.
 	 */
-	public static function visible<T:Element> (e:T, size:DeviceSize):T {
+	public static function visible<T:VirtualNode<Dynamic>> (e:T, size:DeviceSize):T {
 		e.classes(switch (size) {
 			case ExtraSmall: "visible-xs";
 			case Small: "visible-sm";
@@ -483,7 +484,7 @@ class BSTools {
 	/**
 	 * Set image border style.
 	 */
-	public static function hidden<T:Element> (e:T, size:DeviceSize):T {
+	public static function hidden<T:VirtualNode<Dynamic>> (e:T, size:DeviceSize):T {
 		e.classes(switch (size) {
 			case ExtraSmall: "hidden-xs";
 			case Small: "hidden-sm";
@@ -497,7 +498,7 @@ class BSTools {
 	/**
 	 * Turn an element into a group of buttons.
 	 */
-	public static function buttonGroup<T:Element>(e:T, ?align:ButtonGroupAlign, ?size:ButtonSize, ?dropup:Bool):T {
+	public static function buttonGroup<T:VirtualNode<Dynamic>>(e:T, ?align:ButtonGroupAlign, ?size:ButtonSize, ?dropup:Bool):T {
 		if (align == null) align = Regular;
 		
 		if (align != null) {
@@ -523,7 +524,7 @@ class BSTools {
 	/**
 	 * Makes element into a dropdown menu.
 	 */
-	public static function dropdown<T:Element>(e:T):T {
+	public static function dropdown<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("dropdown");
 		
 		return e;
@@ -532,9 +533,9 @@ class BSTools {
 	/**
 	 * Links a button to a toggle the dropdown menu within this button group.
 	 */
-	public static function dropdownButton<T:Element>(e:T):T {
+	public static function dropdownButton<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("dropdown-toggle");
-		untyped e.dataset.toggle = "dropdown";
+		untyped e.node.dataset.toggle = "dropdown";
 		
 		return e;
 	}
@@ -542,8 +543,8 @@ class BSTools {
 	/**
 	 * Turns this span element into a caret character.
 	 */
-	public static function addCaret<T:Element>(e:T):T {
-		e.add(ESpan.create().classes("caret"));
+	public static function addCaret<T:VirtualNode<Dynamic>>(e:T):T {
+		e.add(new ESpan().classes("caret"));
 		
 		return e;
 	}
@@ -551,7 +552,7 @@ class BSTools {
 	/**
 	 * Float left.
 	 */
-	public static function pullLeft<T:Element>(e:T):T {
+	public static function pullLeft<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("pull-left");
 		
 		return e;
@@ -560,7 +561,7 @@ class BSTools {
 	/**
 	 * Float right.
 	 */
-	public static function pullRight<T:Element>(e:T):T {
+	public static function pullRight<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("pull-right");
 		
 		return e;
@@ -569,7 +570,7 @@ class BSTools {
 	/**
 	 * Turn this element into a input group.
 	 */
-	public static function inputGroup<T:Element>(e:T, ?size:InputSize):T {
+	public static function inputGroup<T:VirtualNode<Dynamic>>(e:T, ?size:InputSize):T {
 		if (size == null) size = Medium;
 		
 		e.classes("input-group");
@@ -585,7 +586,7 @@ class BSTools {
 	/**
 	 * Input group addon.
 	 */
-	public static function inputGroupAddon<T:Element>(e:T):T {
+	public static function inputGroupAddon<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("input-group-addon");
 		
 		return e;
@@ -594,7 +595,7 @@ class BSTools {
 	/**
 	 * Input group addon.
 	 */
-	public static function inputGroupButtonAddon<T:Element>(e:T):T {
+	public static function inputGroupButtonAddon<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("input-group-btn");
 		
 		return e;
@@ -603,7 +604,7 @@ class BSTools {
 	/**
 	 * Create a navigation list.
 	 */
-	public static function nav<T:Element>(e:T, ?style:NavStyle, ?align:NavAlign):T {
+	public static function nav<T:VirtualNode<Dynamic>>(e:T, ?style:NavStyle, ?align:NavAlign):T {
 		e.classes("nav");
 		if (style != null) {
 			switch (style) {
@@ -649,7 +650,7 @@ class BSTools {
 	/**
 	 * The website brand.
 	 */
-	public static function brand<T:Element>(e:T):T {
+	public static function brand<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("navbar-brand");
 		
 		return e;
@@ -668,15 +669,15 @@ class BSTools {
 	 * 		p
 	 * 		span
 	 */
-	public static function navbarElement<T:Element>(e:T):T {
-		e.classes(switch (e.tagName.toLowerCase()) {
+	public static function navbarElement<T:VirtualNode<Dynamic>>(e:T):T {
+		e.classes(switch (e.node.tagName.toLowerCase()) {
 			case "form": "navbar-form";
 			case "ul", "ol": "navbar-nav";
 			case "button": "navbar-btn";
 			case "a": "navbar-link";
 			case "p", "span": "navbar-text";
 			case "input":
-				switch (cast(e, EInput).type.toLowerCase()) {
+				switch (cast(e, EInput).node.type.toLowerCase()) {
 					case "submit", "button": "navbar-btn";
 					default: throw "Navbar element not defined for this type of input.";
 				}
@@ -689,7 +690,7 @@ class BSTools {
 	/**
 	 * Navbar float left.
 	 */
-	public static function navbarLeft<T:Element>(e:T):T {
+	public static function navbarLeft<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("navbar-left");
 		
 		return e;
@@ -698,7 +699,7 @@ class BSTools {
 	/**
 	 * Navbar float right.
 	 */
-	public static function navbarRight<T:Element>(e:T):T {
+	public static function navbarRight<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("navbar-right");
 		
 		return e;
@@ -707,8 +708,8 @@ class BSTools {
 	/**
 	 * Add an icon to an element.
 	 */
-	public static function addIcon<T:Element>(e:T, type:IconType):T {
-		e.add(Icon.create(type));
+	public static function addIcon<T:VirtualNode<Dynamic>>(e:T, type:IconType):T {
+		e.add(new Icon(type));
 		
 		return e;
 	}
@@ -720,7 +721,7 @@ class BSTools {
 	 * 		ul
 	 * 		ol
 	 */
-	public static function breadcrumbs<T:Element>(e:T):T {
+	public static function breadcrumbs<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("breadcrumb");
 		
 		return e;
@@ -738,9 +739,9 @@ class BSTools {
 	/**
 	 * Disable an element. Behaviour varies depending on the element.
 	 */
-	public static function disabled<T:Element>(e:T):T {
-		switch (e.tagName.toLowerCase()) {
-			case "button", "command", "fieldset", "input", "keygen", "optgroup", "option", "select", "textarea": e.unsafeAttr(hxdom.Attr.disabled, true);
+	public static function disabled<T:VirtualNode<Dynamic>>(e:T):T {
+		switch (e.node.tagName.toLowerCase()) {
+			case "button", "command", "fieldset", "input", "keygen", "optgroup", "option", "select", "textarea": e.unsafeAttr("disabled", true);
 			default: e.classes("disabled");
 		}
 		
@@ -754,7 +755,7 @@ class BSTools {
 	 * 		ul
 	 * 		ol
 	 */
-	public static function pagination<T:Element>(e:T, ?size:PaginationSize):T {
+	public static function pagination<T:VirtualNode<Dynamic>>(e:T, ?size:PaginationSize):T {
 		e.classes("pagination");
 		if (size != null) {
 			switch (size) {
@@ -774,7 +775,7 @@ class BSTools {
 	 * 		ul
 	 * 		ol
 	 */
-	public static function pager<T:Element>(e:T):T {
+	public static function pager<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("pager");
 		
 		return e;
@@ -801,7 +802,7 @@ class BSTools {
 	/**
 	 * Call extra attention to this element by making it HUGE.
 	 */
-	public static function jumbotron<T:Element>(e:T):T {
+	public static function jumbotron<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("jumbotron");
 		
 		return e;
@@ -810,7 +811,7 @@ class BSTools {
 	/**
 	 * Often used on the title of an article or page.
 	 */
-	public static function pageHeader<T:Element>(e:T):T {
+	public static function pageHeader<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("page-header");
 		
 		return e;
@@ -819,7 +820,7 @@ class BSTools {
 	/**
 	 * Turn an element into a thumbnail.
 	 */
-	public static function thumbnail<T:Element>(e:T):T {
+	public static function thumbnail<T:VirtualNode<Dynamic>>(e:T):T {
 		e.classes("thumbnail");
 		
 		return e;
@@ -837,7 +838,7 @@ class BSTools {
 	/**
 	 * Put the element in a well.
 	 */
-	public static function well<T:Element>(e:T, ?size:WellSize):T {
+	public static function well<T:VirtualNode<Dynamic>>(e:T, ?size:WellSize):T {
 		e.classes("well");
 		if (size != null) {
 			switch (size) {
@@ -853,25 +854,22 @@ class BSTools {
 	/**
 	 * Link a button to a modal popup.
 	 */
-	public static function linkModal<T:Element>(e:T, modal:Modal):T {
-		untyped {
-			//Link DOM element to modal
-			e.__modal = modal;
-		}
+	public static function linkModal<T:VirtualNode<Dynamic>>(e:T, modal:Modal):T {
+		//Link DOM element to modal
+		Reflect.setField(e, "__modal", modal);
+		
 		//Weird typing error with macro -- just use the serializable version for non-js
-		#if js
+		#if (js && !use_vdom)
 		e.addEventListener("click", _doPopup);
 		#else
-		e.__addEventListener("hxdom.BSTools", "click", "_doPopup");
+		e.__addEventListener(BSTools, "click", "_doPopup");
 		#end
 		
 		return e;
 	}
 	
 	static function _doPopup (e:Event):Void {
-		untyped {
-			e.currentTarget.__modal.setVisible(true);
-		}
+		Reflect.field(cast(e.currentTarget, Node).vnode(), "__modal").setVisible(true);
 	}
 	
 }

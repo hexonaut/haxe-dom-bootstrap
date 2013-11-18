@@ -54,7 +54,7 @@ class ProgressBar extends EDiv {
 		if (striped == null) striped = Normal;
 		
 		classes("progress");
-		ebar = EDiv.create().classes("progress-bar");
+		ebar = new EDiv().classes("progress-bar");
 		switch (type) {
 			case Default:
 			case Success: ebar.classes("progress-bar-success");
@@ -78,7 +78,7 @@ class ProgressBar extends EDiv {
 		if (value != null && max != null) {
 			var w = value / max;
 			
-			ebar.style.width = (w * 100) + "%";
+			ebar.node.style.width = (w * 100) + "%";
 		}
 	}
 	

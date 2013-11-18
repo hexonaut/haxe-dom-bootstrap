@@ -24,7 +24,7 @@ class CloseButton extends EButton {
 	public function new () {
 		super();
 		
-		type = "button";
+		node.type = "button";
 		classes("close");
 		addText("×");
 	}

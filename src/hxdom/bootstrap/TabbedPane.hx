@@ -13,13 +13,14 @@ package hxdom.bootstrap;
 import hxdom.Elements;
 import hxdom.html.Element;
 import hxdom.html.Event;
+import hxdom.html.Node;
 
 using hxdom.BSTools;
 using hxdom.DomTools;
 
 typedef TabPane = {
 	label:String,
-	content:Element
+	content:VirtualNode<Dynamic>
 };
 
 /**
@@ -40,8 +41,8 @@ class TabbedPane extends EDiv {
 	public function new (?panes:Array<TabPane>) {
 		super();
 		
-		enav = EUnorderedList.create().nav(Tabs);
-		econtent = EDiv.create().classes("tab-content");
+		enav = new EUnorderedList().nav(Tabs);
+		econtent = new EDiv().classes("tab-content");
 		
 		add(enav);
 		add(econtent);
@@ -50,7 +51,7 @@ class TabbedPane extends EDiv {
 	}
 	
 	function set_panes (panes:Array<TabPane>):Array<TabPane> {
-		for (i in enav.childNodes) {
+		for (i in enav.node.childNodes) {
 			i.firstChild.removeEventListener("click", onTabSelected);
 		}
 		enav.clear();
@@ -59,10 +60,10 @@ class TabbedPane extends EDiv {
 		this.panes = panes;
 		
 		for (i in panes) {
-			var anchor = EAnchor.create().attr(href, "#").addText(i.label);
+			var anchor = new EAnchor().attr(href, "#").addText(i.label);
 			anchor.addEventListener("click", onTabSelected);
-			untyped anchor.__content = i.content;
-			enav.add(EListItem.create().add(anchor));
+			Reflect.setField(anchor, "__content", i.content);
+			enav.add(new EListItem().add(anchor));
 			i.content.classes("tab-pane");
 			econtent.add(i.content);
 		}
@@ -71,28 +72,28 @@ class TabbedPane extends EDiv {
 	}
 	
 	public function clearActive ():Void {
-		for (i in enav.childNodes) {
-			cast(i, Element).removeClasses("active");
+		for (i in enav.node.childNodes) {
+			cast(i, Node).vnode().removeClasses("active");
 		}
-		for (i in econtent.childNodes) {
-			cast(i, Element).removeClasses("active");
+		for (i in econtent.node.childNodes) {
+			cast(i, Node).vnode().removeClasses("active");
 		}
 	}
 	
 	public function setActive (index:Int):Void {
 		clearActive();
 		
-		cast(enav.childNodes[index], Element).classes("active");
-		cast(econtent.childNodes[index], Element).classes("active");
+		cast(enav.node.childNodes[index], Element).vnode().classes("active");
+		cast(econtent.node.childNodes[index], Element).vnode().classes("active");
 	}
 	
 	function onTabSelected (e:Event):Void {
 		//Remove other tab selections
 		clearActive();
 		
-		var anchor:EAnchor = cast e.currentTarget;
-		anchor.parentElement.classes("active");
-		untyped DomTools.classes(anchor.__content, "active");
+		var anchor:Element = cast e.currentTarget;
+		anchor.parentElement.vnode().classes("active");
+		DomTools.classes(Reflect.field(anchor.vnode(), "__content"), "active");
 		
 		e.preventDefault();
 	}

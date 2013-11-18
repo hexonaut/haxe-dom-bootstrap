@@ -49,16 +49,16 @@ class Panel extends EDiv {
 			case Danger: classes("panel-danger");
 		}
 		
-		body = EDiv.create().classes("panel-body");
+		body = new EDiv().classes("panel-body");
 		
 		add(body);
 	}
 	
 	function get_header ():EDiv {
 		if (header == null) {
-			header = EDiv.create();
+			header = new EDiv();
 			header.classes("panel-heading");
-			insertBefore(header, body);
+			node.insertBefore(header.node, body.node);
 		}
 		
 		return header;
@@ -66,7 +66,7 @@ class Panel extends EDiv {
 	
 	function get_footer ():EDiv {
 		if (footer == null) {
-			footer = EDiv.create();
+			footer = new EDiv();
 			footer.classes("panel-footer");
 			add(footer);
 		}

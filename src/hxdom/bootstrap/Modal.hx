@@ -44,9 +44,9 @@ class Modal extends EDiv {
 		
 		classes("modal");
 		
-		edialog = EDiv.create().classes("modal-dialog");
-		econtent = EDiv.create().classes("modal-content");
-		body = EDiv.create().classes("modal-body");
+		edialog = new EDiv().classes("modal-dialog");
+		econtent = new EDiv().classes("modal-content");
+		body = new EDiv().classes("modal-body");
 		
 		econtent.add(body);
 		edialog.add(econtent);
@@ -57,14 +57,14 @@ class Modal extends EDiv {
 	
 	function get_header ():EDiv {
 		if (header == null) {
-			header = EDiv.create();
+			header = new EDiv();
 			header.classes("modal-header");
-			econtent.insertBefore(header, body);
+			econtent.node.insertBefore(header.node, body.node);
 			
 			//Be sure to add in close button first
 			if (closeable) {
-				eclose = CloseButton.create();
-				untyped eclose.dataset.dismiss = "modal";
+				eclose = new CloseButton();
+				untyped eclose.node.dataset.dismiss = "modal";
 				header.add(eclose);
 			}
 		}
@@ -74,7 +74,7 @@ class Modal extends EDiv {
 	
 	function get_footer ():EDiv {
 		if (footer == null) {
-			footer = EDiv.create();
+			footer = new EDiv();
 			footer.classes("modal-footer");
 			econtent.add(footer);
 		}
@@ -90,12 +90,12 @@ class Modal extends EDiv {
 		
 		if (closeable) {
 			if (eclose == null) {
-				eclose = CloseButton.create();
-				untyped eclose.dataset.dismiss = "modal";
-				header.insertBefore(eclose, header.firstChild);
+				eclose = new CloseButton();
+				untyped eclose.node.dataset.dismiss = "modal";
+				header.node.insertBefore(eclose.node, header.node.firstChild);
 			}
 		} else {
-			if (eclose != null) header.removeChild(eclose);
+			if (eclose != null) header.node.removeChild(eclose.node);
 		}
 		
 		return closeable;
@@ -113,14 +113,14 @@ class Modal extends EDiv {
 	public function setVisible (bool:Bool):Void {
 		#if js
 		//Using JQuery to perform fade effect -- maybe consider dropping this
-		untyped new js.JQuery(this).modal(bool ? "show" : "hide");
+		untyped new js.JQuery(this.node).modal(bool ? "show" : "hide");
 		#else
 		//Otherwise just set the classes properly
 		if (bool) {
-			this.style.display = "block";
+			node.style.display = "block";
 			if (fade) classes("fade in");
 		} else {
-			this.style.display = "none";
+			node.style.display = "none";
 			if (fade) removeClasses("fade in");
 		}
 		#end

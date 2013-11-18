@@ -13,6 +13,8 @@ package hxdom.bootstrap;
 import hxdom.Elements;
 import hxdom.html.CharacterData;
 
+using hxdom.DomTools;
+
 /**
  * Easy access to a labelled checkbox which is the most common usage.
  * 
@@ -23,26 +25,26 @@ class LabelledCheckbox extends EDiv {
 	public var label(default, set):String;
 	public var checkbox(default, null):EInput;
 	
-	var etext:CharacterData;
+	var etext:Text;
 
 	public function new (label:String, ?name:String, ?checked:Bool = false) {
 		super();
 		
-		var elabel = ELabel.create();
-		checkbox = EInput.create(Checkbox);
-		if (name != null) checkbox.name = name;
-		if (checked) checkbox.checked = true;
-		etext = Text.create(label);
+		var elabel = new ELabel();
+		checkbox = new EInput(Checkbox);
+		if (name != null) checkbox.node.name = name;
+		if (checked) checkbox.node.checked = true;
+		etext = new Text(label);
 		this.label = label;
-		this.className = "checkbox";
+		classes("checkbox");
 		
-		elabel.appendChild(checkbox);
-		elabel.appendChild(etext);
-		appendChild(elabel);
+		elabel.node.appendChild(checkbox.node);
+		elabel.node.appendChild(etext.node);
+		node.appendChild(elabel.node);
 	}
 	
 	function set_label (label:String):String {
-		this.label = etext.data = label;
+		this.label = etext.node.data = label;
 		
 		return label;
 	}

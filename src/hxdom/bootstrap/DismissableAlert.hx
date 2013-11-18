@@ -26,7 +26,7 @@ class DismissableAlert extends Alert {
 		super(type);
 		
 		classes("alert-dismissable");
-		var btn = CloseButton.create();
+		var btn = new CloseButton();
 		btn.dataset.dismiss = "alert";
 		add(btn);
 	}

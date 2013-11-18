@@ -46,7 +46,7 @@ class Table extends ETable {
 	}
 	
 	public function setOptions (opts:Iterable<TableOptions>):Void {
-		className = "table";		//Clear previous styles
+		node.className = "table";		//Clear previous styles
 		
 		for (i in opts) {
 			classes(switch (i) {
@@ -64,21 +64,21 @@ class Table extends ETable {
 	 * First row is assumed to be a table header.
 	 */
 	public static function build (data:Iterable<Iterable<Dynamic>>, ?opts:Iterable<TableOptions>) {
-		var head = ETableHeader.create();
-		var body = ETableBody.create();
+		var head = new ETableHeader();
+		var body = new ETableBody();
 		var firstRow = true;
 		for (i in data) {
-			var row = TableRow.create();
+			var row = new TableRow();
 			if (firstRow) {
-				for (o in i) row.add(BSTableHeaderCell.create().addText(Std.string(o)));
+				for (o in i) row.add(new BSTableHeaderCell().addText(Std.string(o)));
 				head.add(row);
 				firstRow = false;
 			} else {
-				for (o in i) row.add(TableCell.create().addText(Std.string(o)));
+				for (o in i) row.add(new TableCell().addText(Std.string(o)));
 				body.add(row);
 			}
 		}
-		return Table.create(opts).add(head).add(body);
+		return new Table(opts).add(head).add(body);
 	}
 	
 }

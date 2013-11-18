@@ -26,29 +26,29 @@ class Dropdown extends EUnorderedList {
 	public function new () {
 		super();
 		
-		className = "dropdown-menu";
+		classes("dropdown-menu");
 	}
 	
-	public function addItem (e:Node):Dropdown {
-		add(EListItem.create().add(e));
+	public function addItem (e:VirtualNode<Dynamic>):Dropdown {
+		add(new EListItem().add(e));
 		
 		return this;
 	}
 	
 	public function addDivider ():Dropdown {
-		add(EListItem.create().classes("divider"));
+		add(new EListItem().classes("divider"));
 		
 		return this;
 	}
 	
 	public function addHeader (label:String):Dropdown {
-		add(EListItem.create().classes("dropdown-header").addText(label));
+		add(new EListItem().classes("dropdown-header").addText(label));
 		
 		return this;
 	}
 	
 	public function addLink (url:String, label:String):Dropdown {
-		addItem(EAnchor.create().attr(href, url).addText(label));
+		addItem(new EAnchor().attr(href, url).addText(label));
 		
 		return this;
 	}
