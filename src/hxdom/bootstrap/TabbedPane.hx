@@ -20,7 +20,7 @@ using hxdom.DomTools;
 
 typedef TabPane = {
 	label:String,
-	content:VirtualNode<Dynamic>
+	content:VirtualElement<Dynamic>
 };
 
 /**
@@ -73,18 +73,18 @@ class TabbedPane extends EDiv {
 	
 	public function clearActive ():Void {
 		for (i in enav.node.childNodes) {
-			cast(i, Node).vnode().removeClasses("active");
+			cast(i.vnode(), VirtualElement<Dynamic>).removeClasses("active");
 		}
 		for (i in econtent.node.childNodes) {
-			cast(i, Node).vnode().removeClasses("active");
+			cast(i.vnode(), VirtualElement<Dynamic>).removeClasses("active");
 		}
 	}
 	
 	public function setActive (index:Int):Void {
 		clearActive();
 		
-		cast(enav.node.childNodes[index], Element).vnode().classes("active");
-		cast(econtent.node.childNodes[index], Element).vnode().classes("active");
+		cast(enav.node.childNodes[index].vnode(), VirtualElement<Dynamic>).classes("active");
+		cast(econtent.node.childNodes[index].vnode(), VirtualElement<Dynamic>).classes("active");
 	}
 	
 	function onTabSelected (e:Event):Void {
@@ -92,7 +92,7 @@ class TabbedPane extends EDiv {
 		clearActive();
 		
 		var anchor:Element = cast e.currentTarget;
-		anchor.parentElement.vnode().classes("active");
+		cast(anchor.parentElement.vnode(), VirtualElement<Dynamic>).classes("active");
 		DomTools.classes(Reflect.field(anchor.vnode(), "__content"), "active");
 		
 		e.preventDefault();

@@ -111,7 +111,7 @@ class Modal extends EDiv {
 	}
 	
 	public function setVisible (bool:Bool):Void {
-		#if js
+		#if (js && !use_vdom)
 		//Using JQuery to perform fade effect -- maybe consider dropping this
 		untyped new js.JQuery(this.node).modal(bool ? "show" : "hide");
 		#else
