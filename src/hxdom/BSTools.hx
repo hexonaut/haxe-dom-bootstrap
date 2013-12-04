@@ -14,6 +14,7 @@ import hxdom.bootstrap.Dropdown;
 import hxdom.bootstrap.Icon;
 import hxdom.bootstrap.Modal;
 import hxdom.Elements;
+import hxdom.EventDispatcher;
 import hxdom.html.Element;
 import hxdom.html.Event;
 import hxdom.html.Node;
@@ -862,7 +863,7 @@ class BSTools {
 		#if (js && !use_vdom)
 		e.addEventListener("click", _doPopup);
 		#else
-		e.__addEventListener(hxdom.BSTools, "click", "_doPopup");
+		e.__addEventListener("click", EventDispatcher.make(_doPopup));
 		#end
 		
 		return e;

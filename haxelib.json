@@ -5,9 +5,9 @@
   "description": "Provides type safe usage of Twitter Bootstrap components with hxdom.",
   "contributors": ["Blank101"],
   "releasenote": "Updated to new hxdom version.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "url": "https://github.com/Blank101/haxe-dom-bootstrap",
   "dependencies": {
-    "hxdom": "0.1.4"
+    "hxdom": "0.1.5"
   }
 }
