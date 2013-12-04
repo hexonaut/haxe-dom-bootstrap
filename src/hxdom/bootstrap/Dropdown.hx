@@ -48,7 +48,7 @@ class Dropdown extends EUnorderedList {
 	}
 	
 	public function addLink (url:String, label:String):Dropdown {
-		addItem(new EAnchor().attr(href, url).addText(label));
+		addItem(new EAnchor().attr(Href, url).addText(label));
 		
 		return this;
 	}

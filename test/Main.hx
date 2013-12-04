@@ -26,7 +26,7 @@ class Main {
 		#if js
 		var html = hxdom.js.Boot.init();
 		#else
-		var nav = new ENav().navbar(Inverse, StaticTop).add(new EAnchor().brand().addText("Brand Text").attr(href, "#"));
+		var nav = new ENav().navbar(Inverse, StaticTop).add(new EAnchor().brand().addText("Brand Text").attr(Href, "#"));
 		nav.add(new EForm().navbarElement().add(new EDiv().formGroup().add(new EInput(Search).formControl())).add(new EButton().button().addIcon(Search)));
 		
 		var cont = new EDiv().container();
@@ -81,15 +81,15 @@ class Main {
 		col1.add(modal).add(modalBtn);
 		
 		var html = new EHtml();
-		html.attr(lang, "en");
+		html.attr(Lang, "en");
 		var head = new EHead();
-		head.add(new EMeta().attr(charset, "utf-8"));
-		head.add(new ELink().attr(rel, "stylesheet").attr(href, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"));
-		head.add(new ELink().attr(rel, "stylesheet").attr(href, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css"));
+		head.add(new EMeta().attr(Charset, "utf-8"));
+		head.add(new ELink().attr(Rel, "stylesheet").attr(Href, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"));
+		head.add(new ELink().attr(Rel, "stylesheet").attr(Href, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css"));
 		head.add(new EScript().addText("HTMLDetailsElement = HTMLElement;"));
-		head.add(new EScript().attr(src, "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js").attr(defer, true));
-		head.add(new EScript().attr(src, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js").attr(defer, true));
-		head.add(new EScript().attr(src, "client.js").attr(defer, true));
+		head.add(new EScript().attr(Src, "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js").attr(Defer, true));
+		head.add(new EScript().attr(Src, "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js").attr(Defer, true));
+		head.add(new EScript().attr(Src, "client.js").attr(Defer, true));
 		var body = new EBody();
 		body.add(nav);
 		body.add(cont);
@@ -99,12 +99,12 @@ class Main {
 		#if benchmark
 		var mark = haxe.Timer.stamp();
 		for (i in 0 ... 100) {
-			hxdom.HTMLSerializer.run(html);
+			hxdom.HtmlSerializer.run(html);
 		}
 		neko.Lib.println('Serialize (HTMLSerializer): ${Math.round((haxe.Timer.stamp() - mark)*1000/100)} ms');
 		#end
 		
-		sys.io.File.saveContent("index.html", hxdom.HTMLSerializer.run(html));
+		sys.io.File.saveContent("index.html", hxdom.HtmlSerializer.run(html));
 		#end
 	}
 	

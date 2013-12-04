@@ -60,7 +60,7 @@ class TabbedPane extends EDiv {
 		this.panes = panes;
 		
 		for (i in panes) {
-			var anchor = new EAnchor().attr(href, "#").addText(i.label);
+			var anchor = new EAnchor().attr(Href, "#").addText(i.label);
 			anchor.addEventListener("click", onTabSelected);
 			Reflect.setField(anchor, "__content", i.content);
 			enav.add(new EListItem().add(anchor));
