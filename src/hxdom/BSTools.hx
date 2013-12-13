@@ -670,6 +670,7 @@ class BSTools {
 	 * 		ol
 	 * 		p
 	 * 		span
+	 * 		form
 	 */
 	public static function navbarElement<T:VirtualElement<Dynamic>>(e:T):T {
 		e.classes(switch (e.node.tagName.toLowerCase()) {

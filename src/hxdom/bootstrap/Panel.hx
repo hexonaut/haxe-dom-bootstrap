@@ -41,7 +41,7 @@ class Panel extends EDiv {
 		
 		classes("panel");
 		switch (type) {
-			case Default:
+			case Default: classes("panel-default");
 			case Primary: classes("panel-primary");
 			case Success: classes("panel-success");
 			case Info: classes("panel-info");
