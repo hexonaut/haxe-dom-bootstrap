@@ -289,7 +289,7 @@ class BSTools {
 	}
 	
 	/**
-	 * Inline the list.
+	 * Make a pre scrollable.
 	 */
 	public static function scrollable<T:EPre> (e:T):T {
 		e.classes("pre-scrollable");

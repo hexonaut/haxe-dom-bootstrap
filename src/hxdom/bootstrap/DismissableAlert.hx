@@ -21,14 +21,16 @@ using hxdom.DomTools;
  * @author Sam MacPherson
  */
 class DismissableAlert extends Alert {
+	
+	public var closeButton(default, null):CloseButton;
 
 	public function new (?type:AlertType) {
 		super(type);
 		
 		classes("alert-dismissable");
-		var btn = new CloseButton();
-		btn.dataset.dismiss = "alert";
-		add(btn);
+		closeButton = new CloseButton();
+		closeButton.dataset.dismiss = "alert";
+		add(closeButton);
 	}
 	
 }
