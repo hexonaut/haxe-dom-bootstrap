@@ -31,6 +31,11 @@ class Modal extends EDiv {
 	public var closeable(default, set):Bool;
 	
 	/**
+	 * Set to true to prevent clicking the backdrop from closing the modal.
+	 */
+	public var staticBackdrop(default, set):Bool;
+	
+	/**
 	 * If true then the modal dialog fades in and out.
 	 */
 	public var fade(default, set):Bool;
@@ -99,6 +104,14 @@ class Modal extends EDiv {
 		}
 		
 		return closeable;
+	}
+	
+	function set_staticBackdrop (staticBackdrop:Bool):Bool {
+		this.staticBackdrop = staticBackdrop;
+		
+		untyped node.dataset.backdrop = staticBackdrop ? "static" : "";
+		
+		return staticBackdrop;
 	}
 	
 	function set_fade (fade:Bool):Bool {

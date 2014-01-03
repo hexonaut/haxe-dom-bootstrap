@@ -58,6 +58,7 @@ class Main {
 		
 		var modal = new Modal();
 		modal.closeable = true;
+		modal.staticBackdrop = true;
 		modal.header.add(new EHeader4().addText("Modal Title"));
 		modal.body.add(new EParagraph().addText("Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus. In nisi odio, eleifend in vulputate aliquam, accumsan eget nisi."));
 		var modalBtn = new EButton().button(Primary, Large).addText("Popup!");
