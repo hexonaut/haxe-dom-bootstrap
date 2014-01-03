@@ -1,5 +1,6 @@
 package ;
 
+import hxdom.bootstrap.CloseButton;
 import hxdom.bootstrap.Dropdown;
 import hxdom.bootstrap.DropdownButton;
 import hxdom.bootstrap.Icon;
@@ -22,9 +23,14 @@ using hxdom.DomTools;
 
 class Main {
 	
+	static var html:EHtml;
+	static var modalGroup:ModalGroup;
+	
 	static function main () {
 		#if js
-		var html = hxdom.js.Boot.init();
+		html = cast hxdom.js.Boot.init();
+		modalGroup = new ModalGroup();
+		html.node.childNodes[1].vnode().add(modalGroup);
 		#else
 		var nav = new ENav().navbar(Inverse, StaticTop).add(new EAnchor().brand().addText("Brand Text").attr(Href, "#"));
 		nav.add(new EForm().navbarElement().add(new EDiv().formGroup().add(new EInput(Search).formControl())).add(new EButton().button().addIcon(Search)));
@@ -49,20 +55,14 @@ class Main {
 		;
 		
 		var dropdownBtn = new DropdownButton("Dropdown Btn", Primary);
-		dropdownBtn.dropdown.addHeader("Header 1").addLink("#", "Link 1").addLink("#", "Link 2").addDivider().addHeader("Header 2").addLink("#", "Link 3").addLink("#", "Link 4");
-		
+		dropdownBtn.dropdown.addHeader("Header 1").addLink("#", "Link 1").addLink("#", "Link 2").addDivider().addHeader("Header 2").addLink("#", "Link 3").addLink("#", "Link 4");		
 		var panel = new Panel(Primary);
 		panel.header.add(new EHeader3().classes("panel-title").addText("A table inside a panel with a header!"));
 		panel.body.add(new EParagraph().addText("Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit."));
 		panel.add(Table.build([["#", "First Name", "Last Name", "Username"], ["1", "Mark", "Otto", "@mdo"], ["2", "Jacob", "Thornton", "@fat"], ["3", "Sam", "MacPherson", "@sgmacpherson"]]));
 		
-		var modal = new Modal();
-		modal.closeable = true;
-		modal.staticBackdrop = true;
-		modal.header.add(new EHeader4().addText("Modal Title"));
-		modal.body.add(new EParagraph().addText("Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus. In nisi odio, eleifend in vulputate aliquam, accumsan eget nisi."));
 		var modalBtn = new EButton().button(Primary, Large).addText("Popup!");
-		modalBtn.linkModal(modal);
+		modalBtn.addEventListener("click", popupModal);
 		
 		var tabs = new TabbedPane([
 		{label:"Tab 1", content:new EParagraph().addText("Tab Content 1. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") },
@@ -79,9 +79,9 @@ class Main {
 		cont.add(panel);
 		cont.add(tabs);
 		col1.add(new EDiv().add(dropdownBtn));
-		col1.add(modal).add(modalBtn);
+		col1.add(modalBtn);
 		
-		var html = new EHtml();
+		html = new EHtml();
 		html.attr(Lang, "en");
 		var head = new EHead();
 		head.add(new EMeta().attr(Charset, "utf-8"));
@@ -107,6 +107,21 @@ class Main {
 		
 		sys.io.File.saveContent("index.html", hxdom.HtmlSerializer.run(html));
 		#end
+	}
+	
+	static function popupModal (_):Void {
+		trace("popup");
+		var modal = new Modal();
+		var btn = new CloseButton();
+		modal.header.add(btn);
+		modal.header.add(new EHeader4().addText("Modal Title"));
+		modal.body.add(new EParagraph().addText("Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus. In nisi odio, eleifend in vulputate aliquam, accumsan eget nisi."));
+		modalGroup.addModal(modal);
+		btn.addEventListener("click", closePopup);
+	}
+	
+	static function closePopup (_):Void {
+		modalGroup.modals[0].close();
 	}
 	
 }

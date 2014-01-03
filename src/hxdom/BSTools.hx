@@ -854,25 +854,4 @@ class BSTools {
 		return e;
 	}
 	
-	/**
-	 * Link a button to a modal popup.
-	 */
-	public static function linkModal<T:VirtualElement<Dynamic>>(e:T, modal:Modal):T {
-		//Link DOM element to modal
-		Reflect.setField(e, "__modal", modal);
-		
-		//Weird typing error with macro -- just use the serializable version for non-js
-		#if (js && !use_vdom)
-		e.addEventListener("click", _doPopup);
-		#else
-		e.__addEventListener("click", EventHandler.make(_doPopup));
-		#end
-		
-		return e;
-	}
-	
-	static function _doPopup (e:Event):Void {
-		Reflect.field(cast(e.currentTarget, Node).vnode(), "__modal").setVisible(true);
-	}
-	
 }

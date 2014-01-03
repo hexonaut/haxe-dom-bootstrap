@@ -10,6 +10,7 @@
 
 package hxdom.bootstrap;
 
+import hxdom.bootstrap.Modal.ModalGroup;
 import hxdom.Elements;
 
 using hxdom.DomTools;
@@ -20,34 +21,25 @@ using hxdom.DomTools;
  * @author Sam MacPherson
  */
 class Modal extends EDiv {
-
+	
+	@:allow(hxdom.bootstrap.ModalGroup)
+	public var group(default, null):Null<ModalGroup>;
 	public var header(get, null):EDiv;
 	public var body(default, null):EDiv;
 	public var footer(get, null):EDiv;
 	
 	/**
-	 * Set to true to automatically add a close button to the modal.
+	 * Set whether this modal is visible or not.
 	 */
-	public var closeable(default, set):Bool;
-	
-	/**
-	 * Set to true to prevent clicking the backdrop from closing the modal.
-	 */
-	public var staticBackdrop(default, set):Bool;
-	
-	/**
-	 * If true then the modal dialog fades in and out.
-	 */
-	public var fade(default, set):Bool;
+	public var visible(default, set):Bool;
 	
 	var edialog:EDiv;
 	var econtent:EDiv;
-	var eclose:CloseButton;
 
 	public function new () {
 		super();
 		
-		classes("modal");
+		classes("modal in");
 		
 		edialog = new EDiv().classes("modal-dialog");
 		econtent = new EDiv().classes("modal-content");
@@ -57,7 +49,11 @@ class Modal extends EDiv {
 		edialog.add(econtent);
 		add(edialog);
 		
-		closeable = false;
+		visible = true;
+	}
+	
+	public function close ():Void {
+		if (group != null) group.removeModal(this);
 	}
 	
 	function get_header ():EDiv {
@@ -65,13 +61,6 @@ class Modal extends EDiv {
 			header = new EDiv();
 			header.classes("modal-header");
 			econtent.node.insertBefore(header.node, body.node);
-			
-			//Be sure to add in close button first
-			if (closeable) {
-				eclose = new CloseButton();
-				untyped eclose.node.dataset.dismiss = "modal";
-				header.add(eclose);
-			}
 		}
 		
 		return header;
@@ -87,56 +76,66 @@ class Modal extends EDiv {
 		return footer;
 	}
 	
-	function set_closeable (closeable:Bool):Bool {
-		this.closeable = closeable;
+	public function set_visible (visible:Bool):Bool {
+		this.visible = visible;
 		
-		//Make sure header is available
-		get_header();
+		if (group != null) group.updateBackdrop();
+		if (visible) node.style.display = "block";
+		else node.style.display = "none";
 		
-		if (closeable) {
-			if (eclose == null) {
-				eclose = new CloseButton();
-				untyped eclose.node.dataset.dismiss = "modal";
-				header.node.insertBefore(eclose.node, header.node.firstChild);
+		return visible;
+	}
+	
+}
+
+/**
+ * Provides a common backdrop for an entire group of modals.
+ */
+class ModalGroup extends EDiv {
+	
+	public var backdrop(default, null):EDiv;
+	public var modals(default, null):Array<Modal>;
+	
+	public function new () {
+		super();
+		
+		backdrop = new EDiv().classes("modal-backdrop in");
+		add(backdrop);
+		modals = new Array<Modal>();
+		
+		updateBackdrop();
+	}
+	
+	public function addModal (modal:Modal):ModalGroup {
+		modal.group = this;
+		modals.push(modal);
+		add(modal);
+		
+		updateBackdrop();
+		
+		return this;
+	}
+	
+	public function removeModal (modal:Modal):ModalGroup {
+		remove(modal);
+		modals.remove(modal);
+		modal.group = null;
+		
+		updateBackdrop();
+		
+		return this;
+	}
+	
+	@:allow(hxdom.bootstrap.Modal)
+	function updateBackdrop ():Void {
+		//If at least one modal is visible then show the backdrop
+		backdrop.node.style.display = "none";
+		for (i in modals) {
+			if (i.visible) {
+				backdrop.node.style.display = "block";
+				break;
 			}
-		} else {
-			if (eclose != null) header.node.removeChild(eclose.node);
 		}
-		
-		return closeable;
-	}
-	
-	function set_staticBackdrop (staticBackdrop:Bool):Bool {
-		this.staticBackdrop = staticBackdrop;
-		
-		untyped node.dataset.backdrop = staticBackdrop ? "static" : "";
-		
-		return staticBackdrop;
-	}
-	
-	function set_fade (fade:Bool):Bool {
-		this.fade = fade;
-		
-		if (fade) classes("fade");
-		else removeClasses("fade");
-		
-		return fade;
-	}
-	
-	public function setVisible (bool:Bool):Void {
-		#if (js && !use_vdom)
-		//Using JQuery to perform fade effect -- maybe consider dropping this
-		untyped new js.JQuery(this.node).modal(bool ? "show" : "hide");
-		#else
-		//Otherwise just set the classes properly
-		if (bool) {
-			node.style.display = "block";
-			if (fade) classes("fade in");
-		} else {
-			node.style.display = "none";
-			if (fade) removeClasses("fade in");
-		}
-		#end
 	}
 	
 }
