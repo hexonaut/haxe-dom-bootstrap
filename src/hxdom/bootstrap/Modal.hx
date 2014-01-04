@@ -79,7 +79,7 @@ class Modal extends EDiv {
 	public function set_visible (visible:Bool):Bool {
 		this.visible = visible;
 		
-		if (group != null) group.updateBackdrop();
+		if (group != null) group.updateVisibility();
 		if (visible) node.style.display = "block";
 		else node.style.display = "none";
 		
@@ -103,7 +103,7 @@ class ModalGroup extends EDiv {
 		add(backdrop);
 		modals = new Array<Modal>();
 		
-		updateBackdrop();
+		updateVisibility();
 	}
 	
 	public function addModal (modal:Modal):ModalGroup {
@@ -111,7 +111,7 @@ class ModalGroup extends EDiv {
 		modals.push(modal);
 		add(modal);
 		
-		updateBackdrop();
+		updateVisibility();
 		
 		return this;
 	}
@@ -121,18 +121,18 @@ class ModalGroup extends EDiv {
 		modals.remove(modal);
 		modal.group = null;
 		
-		updateBackdrop();
+		updateVisibility();
 		
 		return this;
 	}
 	
 	@:allow(hxdom.bootstrap.Modal)
-	function updateBackdrop ():Void {
-		//If at least one modal is visible then show the backdrop
-		backdrop.node.style.display = "none";
+	function updateVisibility ():Void {
+		//If at least one modal is visible then show this modal group
+		node.style.display = "none";
 		for (i in modals) {
 			if (i.visible) {
-				backdrop.node.style.display = "block";
+				node.style.display = "block";
 				break;
 			}
 		}
