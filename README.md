@@ -63,34 +63,29 @@ See [http://getbootstrap.com/components/#glyphicons](http://getbootstrap.com/com
 	myContainer.add(mySearchIcon);
 
 Modal Popup
-===========
+-----------
 
-See [http://getbootstrap.com/javascript/#modals](http://getbootstrap.com/javascript/#modals). This example will create a modal with a button that will launch it.
+See [http://getbootstrap.com/javascript/#modals](http://getbootstrap.com/javascript/#modals). This example will create a modal.
 
+	import hxdom.bootstrap.Modal;
 	import hxdom.Elements;
 	
 	using hxdom.BSTools;
 	using hxdom.DomTools;
 	
+	var myModalGroup = new hxdom.bootstrap.ModalGroup();
+	
 	var myModal = new hxdom.bootstrap.Modal();
-	//Add a close button
-	myModal.closeable = true;
 	//Add a title to the modal header
 	myModal.header.add(new EHeader4().addText("Modal Title"));
 	//Add a paragraph to the body of the modal
 	myModal.body.add(new EParagraph().addText("A paragraph of text inside the modal."));
 	
-	//Create a button
-	var myModalBtn = new EButton().button(Primary, Large).addText("Popup!");
-	
-	//Link the button to the modal so it will popup
-	myModalBtn.linkModal(myModal);
-	
-	myContainer.add(myModal);
-	myContainer.add(myModalBtn);
+	myModalGroup.add(myModal);
+	myContainer.add(myModalGroup);
 
 Tabbed Pane
-===========
+-----------
 
 See [http://getbootstrap.com/javascript/#tabs](http://getbootstrap.com/javascript/#tabs). Create a tabbed pane. Content changes based on the active tab.
 
@@ -100,12 +95,11 @@ See [http://getbootstrap.com/javascript/#tabs](http://getbootstrap.com/javascrip
 	using hxdom.DomTools;
 	
 	//Create the tabbed pane
-	var myTabs = new hxdom.bootstrap.TabbedPane([
-		{label:"Tab 1", content:new EParagraph().addText("Tab Content 1. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") },
-		{label:"Tab 2", content:new EParagraph().addText("Tab Content 2. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") },
-		{label:"Tab 3", content:new EParagraph().addText("Tab Content 3. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") }
-	]);
+	var myTabs = new hxdom.bootstrap.TabbedPane()
+		.addPane({label:"Tab 1", content:new EParagraph().addText("Tab Content 1. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") })
+		.addPane({label:"Tab 2", content:new EParagraph().addText("Tab Content 2. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") })
+		.addPane({label:"Tab 3", content:new EParagraph().addText("Tab Content 3. Fusce ultrices risus in quam dapibus iaculis. Quisque non scelerisque nisi, sed pharetra sapien. Aenean ipsum sapien, accumsan ut pretium sed, mollis eget mauris. Integer vel arcu sit amet nunc tincidunt consectetur. Suspendisse enim nisl, faucibus eu auctor at, porttitor vel magna. Ut feugiat lorem eget massa vulputate faucibus.") });
 	//Set the first tab to active by default
-	myTabs.setActive(0);
+	myTabs.active = 0;
 	
 	myContainer.add(myTabs);
