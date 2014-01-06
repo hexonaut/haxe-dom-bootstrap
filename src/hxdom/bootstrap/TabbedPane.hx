@@ -33,69 +33,102 @@ class TabbedPane extends EDiv {
 	/**
 	 * The panes of this element.
 	 */
-	public var panes(default, set):Array<TabPane>;
+	public var panes(default, null):Array<TabPane>;
+	
+	/**
+	 * Marks the active tab.
+	 */
+	public var active(default, set):Int;
 	
 	var enav:EUnorderedList;
 	var econtent:EDiv;
 
-	public function new (?panes:Array<TabPane>) {
+	public function new () {
 		super();
 		
 		enav = new EUnorderedList().nav(Tabs);
-		econtent = new EDiv().classes("tab-content");
-		
 		add(enav);
+		econtent = new EDiv().classes("tab-content");
 		add(econtent);
 		
-		if (panes != null) this.panes = panes;
+		enav.addEventListener("click", onTabSelect);
 	}
 	
-	function set_panes (panes:Array<TabPane>):Array<TabPane> {
-		for (i in enav.node.childNodes) {
-			i.firstChild.removeEventListener("click", onTabSelected);
-		}
-		enav.clear();
-		econtent.clear();
-		
-		this.panes = panes;
-		
-		for (i in panes) {
-			var anchor = new EAnchor().attr(Href, "#").addText(i.label);
-			anchor.addEventListener("click", onTabSelected);
-			Reflect.setField(anchor, "__content", i.content);
-			enav.add(new EListItem().add(anchor));
-			i.content.classes("tab-pane");
-			econtent.add(i.content);
+	public function clearPanes (pane:TabPane):TabbedPane {
+		while (panes.length > 0) {
+			removePane(panes[0]);
 		}
 		
-		return panes;
+		return this;
 	}
 	
-	public function clearActive ():Void {
-		for (i in enav.node.childNodes) {
-			cast(i.vnode(), VirtualElement<Dynamic>).removeClasses("active");
-		}
-		for (i in econtent.node.childNodes) {
-			cast(i.vnode(), VirtualElement<Dynamic>).removeClasses("active");
-		}
+	public function addPane (pane:TabPane):TabbedPane {
+		enav.add(new Tab(pane));
+		pane.content.classes("tab-pane");
+		econtent.add(pane.content);
+		
+		return this;
 	}
 	
-	public function setActive (index:Int):Void {
-		clearActive();
+	public function removePane (pane:TabPane):TabbedPane {
+		econtent.remove(pane.content);
+		pane.content.removeClasses("tab-pane");
+		for (i in enav) {
+			if (cast(i, Tab).pane == pane) {
+				enav.remove(i);
+				break;
+			}
+		}
 		
-		cast(enav.node.childNodes[index].vnode(), VirtualElement<Dynamic>).classes("active");
-		cast(econtent.node.childNodes[index].vnode(), VirtualElement<Dynamic>).classes("active");
+		return this;
 	}
 	
-	function onTabSelected (e:Event):Void {
-		//Remove other tab selections
-		clearActive();
+	function set_active (active:Int):Int {
+		if (this.active != null) {
+			cast(enav.node.childNodes[this.active].vnode(), VirtualElement<Dynamic>).removeClasses("active");
+			cast(econtent.node.childNodes[this.active].vnode(), VirtualElement<Dynamic>).removeClasses("active");
+		}
 		
-		var anchor:Element = cast e.currentTarget;
-		cast(anchor.parentElement.vnode(), VirtualElement<Dynamic>).classes("active");
-		DomTools.classes(Reflect.field(anchor.vnode(), "__content"), "active");
+		this.active = active;
 		
+		if (active != null) {
+			cast(enav.node.childNodes[active].vnode(), VirtualElement<Dynamic>).classes("active");
+			cast(econtent.node.childNodes[active].vnode(), VirtualElement<Dynamic>).classes("active");
+		}
+		
+		return active;
+	}
+	
+	function onTabSelect (e:Event):Void {
 		e.preventDefault();
+		
+		var tab = e.delegate(Tab);
+		var index = 0;
+		for (i in enav) {
+			if (i == tab) {
+				break;
+			}
+			index++;
+		}
+		active = index;
+	}
+	
+}
+
+private class Tab extends EListItem {
+	
+	public var pane(default, null):TabPane;
+	public var anchor(default, null):EAnchor;
+	
+	public function new (pane:TabPane):Void {
+		super();
+		
+		this.pane = pane;
+		
+		add(anchor = new EAnchor()
+			.attr(Href, "#")
+			.addText(pane.label)
+		);
 	}
 	
 }
