@@ -38,13 +38,15 @@ class TabbedPane extends EDiv {
 	/**
 	 * Marks the active tab.
 	 */
-	public var active(default, set):Int;
+	public var active(default, set):Null<Int>;
 	
 	var enav:EUnorderedList;
 	var econtent:EDiv;
 
 	public function new () {
 		super();
+		
+		panes = new Array<TabPane>();
 		
 		enav = new EUnorderedList().nav(Tabs);
 		add(enav);
@@ -54,7 +56,8 @@ class TabbedPane extends EDiv {
 		enav.addEventListener("click", onTabSelect);
 	}
 	
-	public function clearPanes (pane:TabPane):TabbedPane {
+	public function clearPanes ():TabbedPane {
+		active = null;
 		while (panes.length > 0) {
 			removePane(panes[0]);
 		}
@@ -66,6 +69,7 @@ class TabbedPane extends EDiv {
 		enav.add(new Tab(pane));
 		pane.content.classes("tab-pane");
 		econtent.add(pane.content);
+		panes.push(pane);
 		
 		return this;
 	}
@@ -73,17 +77,22 @@ class TabbedPane extends EDiv {
 	public function removePane (pane:TabPane):TabbedPane {
 		econtent.remove(pane.content);
 		pane.content.removeClasses("tab-pane");
+		var index = 0;
 		for (i in enav) {
-			if (cast(i, Tab).pane == pane) {
+			if (Std.is(i, Tab) && cast(i, Tab).pane == pane) {
 				enav.remove(i);
+				if (active != null && active >= index) active--;
 				break;
 			}
+			
+			index++;
 		}
+		panes.remove(pane);
 		
 		return this;
 	}
 	
-	function set_active (active:Int):Int {
+	function set_active (active:Null<Int>):Null<Int> {
 		if (this.active != null) {
 			cast(enav.node.childNodes[this.active].vnode(), VirtualElement<Dynamic>).removeClasses("active");
 			cast(econtent.node.childNodes[this.active].vnode(), VirtualElement<Dynamic>).removeClasses("active");
@@ -103,19 +112,19 @@ class TabbedPane extends EDiv {
 		e.preventDefault();
 		
 		var tab = e.delegate(Tab);
-		var index = 0;
-		for (i in enav) {
-			if (i == tab) {
-				break;
+		if (tab != null) {
+			for (i in 0 ... panes.length) {
+				if (panes[i] == tab.pane) {
+					active = i;
+					break;
+				}
 			}
-			index++;
 		}
-		active = index;
 	}
 	
 }
 
-private class Tab extends EListItem {
+class Tab extends EListItem {
 	
 	public var pane(default, null):TabPane;
 	public var anchor(default, null):EAnchor;
