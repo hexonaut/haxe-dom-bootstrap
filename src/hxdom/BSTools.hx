@@ -57,7 +57,7 @@ enum InputSize {
 	Large;
 }
 
-enum ButtonType {
+enum BSButtonType {
 	Default;
 	Primary;
 	Success;
@@ -407,7 +407,7 @@ class BSTools {
 	 * 		input[button]
 	 * 		a
 	 */
-	public static function button<T:VirtualElement<Dynamic>> (e:T, ?type:ButtonType, ?size:ButtonSize):T {
+	public static function button<T:VirtualElement<Dynamic>> (e:T, ?type:BSButtonType, ?size:ButtonSize):T {
 		if (type == null) type = Default;
 		
 		e.classes("btn");

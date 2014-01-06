@@ -27,7 +27,7 @@ class DropdownButton extends EDiv {
 	
 	public var dropdown(default, null):Dropdown;
 
-	public function new (label:String, ?type:ButtonType, ?align:ButtonGroupAlign, ?size:ButtonSize) {
+	public function new (label:String, ?type:BSButtonType, ?align:ButtonGroupAlign, ?size:ButtonSize) {
 		super();
 		
 		buttonGroup(align, size);

@@ -4,10 +4,10 @@
   "tags": ["cross", "web"],
   "description": "Provides type safe usage of Twitter Bootstrap components with hxdom.",
   "contributors": ["Blank101"],
-  "releasenote": "Updated to new hxdom version. Refactored Modal.",
-  "version": "0.1.7",
+  "releasenote": "Updated to new hxdom version.",
+  "version": "0.1.8",
   "url": "https://github.com/Blank101/haxe-dom-bootstrap",
   "dependencies": {
-    "hxdom": "0.2.1"
+    "hxdom": "0.2.2"
   }
 }
