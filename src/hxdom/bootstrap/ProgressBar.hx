@@ -45,6 +45,11 @@ class ProgressBar extends EDiv {
 	 */
 	public var max(default, set):Float;
 	
+	/**
+	 * The visual display type of this progress bar.
+	 */
+	public var type(default, set):ProgressBarType;
+	
 	var ebar:EDiv;
 	
 	public function new (?value:Float = 0.0, ?max:Float = 1.0, ?type:ProgressBarType, ?striped:ProgressBarStriped) {
@@ -55,13 +60,6 @@ class ProgressBar extends EDiv {
 		
 		classes("progress");
 		ebar = new EDiv().classes("progress-bar");
-		switch (type) {
-			case Default:
-			case Success: ebar.classes("progress-bar-success");
-			case Info: ebar.classes("progress-bar-info");
-			case Warning: ebar.classes("progress-bar-warning");
-			case Danger: ebar.classes("progress-bar-danger");
-		}
 		switch (striped) {
 			case Normal:
 			case Striped: classes("progress-striped");
@@ -72,6 +70,8 @@ class ProgressBar extends EDiv {
 		this.max = max;
 		
 		add(ebar);
+		
+		this.type = type;
 	}
 	
 	function refresh ():Void {
@@ -96,6 +96,30 @@ class ProgressBar extends EDiv {
 		refresh();
 		
 		return max;
+	}
+	
+	function set_type (type:ProgressBarType):ProgressBarType {
+		if (this.type != null) {
+			switch (this.type) {
+				case Default:
+				case Success: ebar.removeClasses("progress-bar-success");
+				case Info: ebar.removeClasses("progress-bar-info");
+				case Warning: ebar.removeClasses("progress-bar-warning");
+				case Danger: ebar.removeClasses("progress-bar-danger");
+			}
+		}
+		
+		this.type = type;
+		
+		switch (type) {
+			case Default:
+			case Success: ebar.classes("progress-bar-success");
+			case Info: ebar.classes("progress-bar-info");
+			case Warning: ebar.classes("progress-bar-warning");
+			case Danger: ebar.classes("progress-bar-danger");
+		}
+		
+		return type;
 	}
 	
 }
