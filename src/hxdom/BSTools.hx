@@ -854,4 +854,22 @@ class BSTools {
 		return e;
 	}
 	
+	/**
+	 * Turn a list into a list group.
+	 */
+	public static function listGroup<T:VirtualElement<Dynamic>>(e:T):T {
+		e.classes("list-group");
+		
+		return e;
+	}
+	
+	/**
+	 * An item in a list group.
+	 */
+	public static function listGroupItem<T:VirtualElement<Dynamic>>(e:T):T {
+		e.classes("list-group-item");
+		
+		return e;
+	}
+	
 }
