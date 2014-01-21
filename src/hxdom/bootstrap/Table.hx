@@ -20,7 +20,6 @@ enum TableOptions {
 	Bordered;
 	Hover;
 	Condensed;
-	Responsive;
 }
 
 enum TableEmphasis {
@@ -54,7 +53,6 @@ class Table extends ETable {
 				case Bordered: "table-bordered";
 				case Hover: "table-hover";
 				case Condensed: "table-condensed";
-				case Responsive: "table-responsive";
 			});
 		}
 	}
