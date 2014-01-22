@@ -25,15 +25,18 @@ using hxdom.BSTools;
  */
 class DropdownButton extends EDiv {
 	
+	public var button(default, null):EButton;
 	public var dropdown(default, null):Dropdown;
 
-	public function new (label:String, ?type:BSButtonType, ?align:ButtonGroupAlign, ?size:ButtonSize) {
+	public function new (?label:String, ?type:BSButtonType, ?align:ButtonGroupAlign, ?size:ButtonSize) {
 		super();
 		
 		buttonGroup(align, size);
 		dropdown = new Dropdown();
 		
-		add(new EButton().button(type).dropdownButton().addText(label + " ").addCaret());
+		add(button = new EButton().button(type).dropdownButton());
+		if (label != null) button.addText(label + " ");
+		button.addCaret();
 		add(dropdown);
 	}
 	
