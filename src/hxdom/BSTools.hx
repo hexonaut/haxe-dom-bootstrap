@@ -872,4 +872,40 @@ class BSTools {
 		return e;
 	}
 	
+	/**
+	 * A media object.
+	 */
+	public static function media<T:VirtualElement<Dynamic>>(e:T):T {
+		e.classes("media");
+		
+		return e;
+	}
+	
+	/**
+	 * The image associated with the media object.
+	 */
+	public static function mediaObject<T:VirtualElement<Dynamic>>(e:T):T {
+		e.classes("media-object");
+		
+		return e;
+	}
+	
+	/**
+	 * The body of the media object.
+	 */
+	public static function mediaBody<T:VirtualElement<Dynamic>>(e:T):T {
+		e.classes("media-body");
+		
+		return e;
+	}
+	
+	/**
+	 * A media object heading.
+	 */
+	public static function mediaHeading<T:VirtualElement<Dynamic>>(e:T):T {
+		e.classes("media-heading");
+		
+		return e;
+	}
+	
 }
