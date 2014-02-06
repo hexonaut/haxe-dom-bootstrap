@@ -58,21 +58,21 @@ class Table extends ETable {
 	}
 	
 	/**
-	 * Convienance method for mapping a 2D array of objects to a table.
+	 * Convienance method for mapping a 2D array of elements to a table.
 	 * First row is assumed to be a table header.
 	 */
-	public static function build (data:Iterable<Iterable<Dynamic>>, ?opts:Iterable<TableOptions>) {
+	public static function build (data:Iterable<Iterable<VirtualNode<Dynamic>>>, ?opts:Iterable<TableOptions>) {
 		var head = new ETableHeader();
 		var body = new ETableBody();
 		var firstRow = true;
 		for (i in data) {
 			var row = new TableRow();
 			if (firstRow) {
-				for (o in i) row.add(new BSTableHeaderCell().addText(Std.string(o)));
+				for (o in i) row.add(new BSTableHeaderCell().add(o));
 				head.add(row);
 				firstRow = false;
 			} else {
-				for (o in i) row.add(new TableCell().addText(Std.string(o)));
+				for (o in i) row.add(new TableCell().add(o));
 				body.add(row);
 			}
 		}
