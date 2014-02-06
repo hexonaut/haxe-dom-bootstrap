@@ -27,12 +27,13 @@ class LabelledRadio extends EDiv {
 	
 	var etext:Text;
 
-	public function new (label:String, ?name:String, ?checked:Bool = false) {
+	public function new (label:String, ?name:String, ?value:String, ?checked:Bool = false) {
 		super();
 		
 		var elabel = new ELabel();
 		radio = new EInput(Radio);
 		if (name != null) radio.node.name = name;
+		if (value != null) radio.node.value = value;
 		if (checked) radio.node.checked = true;
 		etext = new Text(label);
 		this.label = label;

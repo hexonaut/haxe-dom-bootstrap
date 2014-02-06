@@ -53,8 +53,8 @@ class Main {
 		var form = new EForm()
 		.add(new LabelledCheckbox("A common checkbox", "asdf", true))
 		.add(new LabelledCheckbox("An unchecked checkbox"))
-		.add(new LabelledRadio("Radio 1", "radio"))
-		.add(new LabelledRadio("Radio 2", "radio", true))
+		.add(new LabelledRadio("Radio 1", "radio", "val1"))
+		.add(new LabelledRadio("Radio 2", "radio", "val2", true))
 		;
 		
 		var dropdownBtn = new DropdownButton("Dropdown Btn", Primary);
