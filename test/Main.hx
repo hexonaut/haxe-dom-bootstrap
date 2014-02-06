@@ -5,6 +5,7 @@ import hxdom.bootstrap.Dropdown;
 import hxdom.bootstrap.DropdownButton;
 import hxdom.bootstrap.Icon;
 import hxdom.bootstrap.LabelledCheckbox;
+import hxdom.bootstrap.LabelledRadio;
 import hxdom.bootstrap.Modal;
 import hxdom.bootstrap.Panel;
 import hxdom.bootstrap.ProgressBar;
@@ -52,6 +53,8 @@ class Main {
 		var form = new EForm()
 		.add(new LabelledCheckbox("A common checkbox", "asdf", true))
 		.add(new LabelledCheckbox("An unchecked checkbox"))
+		.add(new LabelledRadio("Radio 1", "radio"))
+		.add(new LabelledRadio("Radio 2", "radio", true))
 		;
 		
 		var dropdownBtn = new DropdownButton("Dropdown Btn", Primary);
