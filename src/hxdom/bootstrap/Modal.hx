@@ -128,11 +128,11 @@ class ModalGroup extends EDiv {
 	
 	@:allow(hxdom.bootstrap.Modal)
 	function updateVisibility ():Void {
-		//If at least one modal is visible then show this modal group
-		node.style.display = "none";
+		//If at least one modal is visible then show the backdrop
+		backdrop.node.style.display = "none";
 		for (i in modals) {
 			if (i.visible) {
-				node.style.display = "block";
+				backdrop.node.style.display = "block";
 				break;
 			}
 		}
