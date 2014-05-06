@@ -15,7 +15,6 @@ import hxdom.bootstrap.Icon;
 import hxdom.bootstrap.Modal;
 import hxdom.Elements;
 import hxdom.EventDispatcher;
-import hxdom.EventHandler;
 import hxdom.html.Element;
 import hxdom.html.Event;
 import hxdom.html.Node;
