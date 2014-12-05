@@ -36,7 +36,7 @@ class LabelledCheckbox extends EDiv {
 		if (checked) checkbox.node.checked = true;
 		etext = new Text(label);
 		this.label = label;
-		classes("checkbox");
+		addClass("checkbox");
 		
 		elabel.node.appendChild(checkbox.node);
 		elabel.node.appendChild(etext.node);

@@ -34,10 +34,10 @@ class DropdownButton extends EDiv {
 		buttonGroup(align, size);
 		dropdown = new Dropdown();
 		
-		add(button = new EButton().button(type).dropdownButton());
+		append(button = new EButton().button(type).dropdownButton());
 		if (label != null) button.addText(label + " ");
 		button.addCaret();
-		add(dropdown);
+		append(dropdown);
 	}
 	
 }

@@ -37,7 +37,7 @@ class LabelledRadio extends EDiv {
 		if (checked) radio.node.checked = true;
 		etext = new Text(label);
 		this.label = label;
-		classes("radio");
+		addClass("radio");
 		
 		elabel.node.appendChild(radio.node);
 		elabel.node.appendChild(etext.node);

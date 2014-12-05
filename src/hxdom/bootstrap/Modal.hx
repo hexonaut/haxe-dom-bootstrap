@@ -39,15 +39,15 @@ class Modal extends EDiv {
 	public function new () {
 		super();
 		
-		classes("modal in");
+		addClass("modal in");
 		
-		edialog = new EDiv().classes("modal-dialog");
-		econtent = new EDiv().classes("modal-content");
-		body = new EDiv().classes("modal-body");
+		edialog = new EDiv().addClass("modal-dialog");
+		econtent = new EDiv().addClass("modal-content");
+		body = new EDiv().addClass("modal-body");
 		
-		econtent.add(body);
-		edialog.add(econtent);
-		add(edialog);
+		econtent.append(body);
+		edialog.append(econtent);
+		append(edialog);
 		
 		visible = true;
 	}
@@ -59,7 +59,7 @@ class Modal extends EDiv {
 	function get_header ():EDiv {
 		if (header == null) {
 			header = new EDiv();
-			header.classes("modal-header");
+			header.addClass("modal-header");
 			econtent.node.insertBefore(header.node, body.node);
 		}
 		
@@ -69,8 +69,8 @@ class Modal extends EDiv {
 	function get_footer ():EDiv {
 		if (footer == null) {
 			footer = new EDiv();
-			footer.classes("modal-footer");
-			econtent.add(footer);
+			footer.addClass("modal-footer");
+			econtent.append(footer);
 		}
 		
 		return footer;
@@ -99,8 +99,8 @@ class ModalGroup extends EDiv {
 	public function new () {
 		super();
 		
-		backdrop = new EDiv().classes("modal-backdrop in");
-		add(backdrop);
+		backdrop = new EDiv().addClass("modal-backdrop in");
+		append(backdrop);
 		modals = new Array<Modal>();
 		
 		updateVisibility();
@@ -109,7 +109,7 @@ class ModalGroup extends EDiv {
 	public function addModal (modal:Modal):ModalGroup {
 		modal.group = this;
 		modals.push(modal);
-		add(modal);
+		append(modal);
 		
 		updateVisibility();
 		
@@ -117,7 +117,7 @@ class ModalGroup extends EDiv {
 	}
 	
 	public function removeModal (modal:Modal):ModalGroup {
-		remove(modal);
+		modal.remove();
 		modals.remove(modal);
 		modal.group = null;
 		

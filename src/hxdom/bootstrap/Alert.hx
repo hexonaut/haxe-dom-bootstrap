@@ -34,13 +34,13 @@ class Alert extends EDiv {
 		
 		if (type == null) type = Default;
 		
-		classes("alert");
+		addClass("alert");
 		switch (type) {
 			case Default:
-			case Success: classes("alert-success");
-			case Info: classes("alert-info");
-			case Danger: classes("alert-danger");
-			case Warning: classes("alert-warning");
+			case Success: addClass("alert-success");
+			case Info: addClass("alert-info");
+			case Danger: addClass("alert-danger");
+			case Warning: addClass("alert-warning");
 		}
 	}
 	

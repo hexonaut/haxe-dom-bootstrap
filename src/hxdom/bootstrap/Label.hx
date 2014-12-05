@@ -36,8 +36,8 @@ class Label extends ESpan {
 		if (type == null) type = Default;
 		
 		addText(txt);
-		e.classes("label");
-		e.classes(switch (type) {
+		e.addClass("label");
+		e.addClass(switch (type) {
 			case Default: "label-default";
 			case Primary: "label-primary";
 			case Success: "label-success";

@@ -49,11 +49,11 @@ class TabbedPane extends EDiv {
 		panes = new Array<TabPane>();
 		
 		enav = new EUnorderedList().nav(Tabs);
-		add(enav);
-		econtent = new EDiv().classes("tab-content");
-		add(econtent);
+		append(enav);
+		econtent = new EDiv().addClass("tab-content");
+		append(econtent);
 		
-		enav.addEventListener("click", onTabSelect);
+		enav.delegate(Tab, "click", onTabSelect);
 	}
 	
 	public function clearPanes ():TabbedPane {
@@ -66,21 +66,21 @@ class TabbedPane extends EDiv {
 	}
 	
 	public function addPane (pane:TabPane):TabbedPane {
-		enav.add(new Tab(pane));
-		pane.content.classes("tab-pane");
-		econtent.add(pane.content);
+		enav.append(new Tab(pane));
+		pane.content.addClass("tab-pane");
+		econtent.append(pane.content);
 		panes.push(pane);
 		
 		return this;
 	}
 	
 	public function removePane (pane:TabPane):TabbedPane {
-		econtent.remove(pane.content);
-		pane.content.removeClasses("tab-pane");
+		pane.content.remove();
+		pane.content.removeClass("tab-pane");
 		var index = 0;
 		for (i in enav) {
 			if (Std.is(i, Tab) && cast(i, Tab).pane == pane) {
-				enav.remove(i);
+				i.remove();
 				if (active != null && active >= index) active--;
 				break;
 			}
@@ -94,30 +94,27 @@ class TabbedPane extends EDiv {
 	
 	function set_active (active:Null<Int>):Null<Int> {
 		if (this.active != null) {
-			cast(enav.node.childNodes[this.active].vnode(), VirtualElement<Dynamic>).removeClasses("active");
-			cast(econtent.node.childNodes[this.active].vnode(), VirtualElement<Dynamic>).removeClasses("active");
+			cast(enav.node.childNodes[this.active].vnode(), VirtualElement<Dynamic>).removeClass("active");
+			cast(econtent.node.childNodes[this.active].vnode(), VirtualElement<Dynamic>).removeClass("active");
 		}
 		
 		this.active = active;
 		
 		if (active != null) {
-			cast(enav.node.childNodes[active].vnode(), VirtualElement<Dynamic>).classes("active");
-			cast(econtent.node.childNodes[active].vnode(), VirtualElement<Dynamic>).classes("active");
+			cast(enav.node.childNodes[active].vnode(), VirtualElement<Dynamic>).addClass("active");
+			cast(econtent.node.childNodes[active].vnode(), VirtualElement<Dynamic>).addClass("active");
 		}
 		
 		return active;
 	}
 	
-	function onTabSelect (e:Event):Void {
+	function onTabSelect (e:Event, tab:Tab):Void {
 		e.preventDefault();
 		
-		var tab = e.delegate(Tab);
-		if (tab != null) {
-			for (i in 0 ... panes.length) {
-				if (panes[i] == tab.pane) {
-					active = i;
-					break;
-				}
+		for (i in 0 ... panes.length) {
+			if (panes[i] == tab.pane) {
+				active = i;
+				break;
 			}
 		}
 	}
@@ -134,8 +131,8 @@ class Tab extends EListItem {
 		
 		this.pane = pane;
 		
-		add(anchor = new EAnchor()
-			.attr(Href, "#")
+		append(anchor = new EAnchor()
+			.setAttr("href", "#")
 			.addText(pane.label)
 		);
 	}

@@ -230,7 +230,7 @@ class Icon extends ESpan {
 	public function new (type:IconType) {
 		super();
 		
-		classes("glyphicon glyphicon-" + enumToCls(type));
+		addClass("glyphicon glyphicon-" + enumToCls(type));
 	}
 	
 	inline function enumToCls (type:IconType):String {

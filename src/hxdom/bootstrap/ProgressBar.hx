@@ -58,18 +58,18 @@ class ProgressBar extends EDiv {
 		if (type == null) type = Default;
 		if (striped == null) striped = Normal;
 		
-		classes("progress");
-		ebar = new EDiv().classes("progress-bar");
+		addClass("progress");
+		ebar = new EDiv().addClass("progress-bar");
 		switch (striped) {
 			case Normal:
-			case Striped: classes("progress-striped");
-			case Animated: classes("progress-striped active");
+			case Striped: addClass("progress-striped");
+			case Animated: addClass("progress-striped active");
 		}
 		
 		this.value = value;
 		this.max = max;
 		
-		add(ebar);
+		append(ebar);
 		
 		this.type = type;
 	}
@@ -102,10 +102,10 @@ class ProgressBar extends EDiv {
 		if (this.type != null) {
 			switch (this.type) {
 				case Default:
-				case Success: ebar.removeClasses("progress-bar-success");
-				case Info: ebar.removeClasses("progress-bar-info");
-				case Warning: ebar.removeClasses("progress-bar-warning");
-				case Danger: ebar.removeClasses("progress-bar-danger");
+				case Success: ebar.removeClass("progress-bar-success");
+				case Info: ebar.removeClass("progress-bar-info");
+				case Warning: ebar.removeClass("progress-bar-warning");
+				case Danger: ebar.removeClass("progress-bar-danger");
 			}
 		}
 		
@@ -113,10 +113,10 @@ class ProgressBar extends EDiv {
 		
 		switch (type) {
 			case Default:
-			case Success: ebar.classes("progress-bar-success");
-			case Info: ebar.classes("progress-bar-info");
-			case Warning: ebar.classes("progress-bar-warning");
-			case Danger: ebar.classes("progress-bar-danger");
+			case Success: ebar.addClass("progress-bar-success");
+			case Info: ebar.addClass("progress-bar-info");
+			case Warning: ebar.addClass("progress-bar-warning");
+			case Danger: ebar.addClass("progress-bar-danger");
 		}
 		
 		return type;

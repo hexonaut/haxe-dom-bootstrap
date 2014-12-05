@@ -27,10 +27,10 @@ class DismissableAlert extends Alert {
 	public function new (?type:AlertType) {
 		super(type);
 		
-		classes("alert-dismissable");
+		addClass("alert-dismissable");
 		closeButton = new CloseButton();
 		untyped closeButton.node.dataset.dismiss = "alert";
-		add(closeButton);
+		append(closeButton);
 	}
 	
 }

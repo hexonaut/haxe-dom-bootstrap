@@ -39,7 +39,7 @@ class Table extends ETable {
 	public function new (?opts:Iterable<TableOptions>) {
 		super();
 		
-		classes("table");
+		addClass("table");
 		
 		if (opts != null) setOptions(opts);
 	}
@@ -48,7 +48,7 @@ class Table extends ETable {
 		node.className = "table";		//Clear previous styles
 		
 		for (i in opts) {
-			classes(switch (i) {
+			addClass(switch (i) {
 				case Striped: "table-striped";
 				case Bordered: "table-bordered";
 				case Hover: "table-hover";
@@ -68,15 +68,15 @@ class Table extends ETable {
 		for (i in data) {
 			var row = new TableRow();
 			if (firstRow) {
-				for (o in i) row.add(new BSTableHeaderCell().add(o));
-				head.add(row);
+				for (o in i) row.append(new BSTableHeaderCell().append(o));
+				head.append(row);
 				firstRow = false;
 			} else {
-				for (o in i) row.add(new TableCell().add(o));
-				body.add(row);
+				for (o in i) row.append(new TableCell().append(o));
+				body.append(row);
 			}
 		}
-		return new Table(opts).add(head).add(body);
+		return new Table(opts).append(head).append(body);
 	}
 	
 }
@@ -87,7 +87,7 @@ class TableRow extends ETableRow {
 		super();
 		
 		if (emphasis != null) {
-			classes(switch (emphasis) {
+			addClass(switch (emphasis) {
 				case Active: "active";
 				case Success: "success";
 				case Warning: "warning";
@@ -104,7 +104,7 @@ class BSTableHeaderCell extends ETableHeaderCell {
 		super();
 		
 		if (emphasis != null) {
-			classes(switch (emphasis) {
+			addClass(switch (emphasis) {
 				case Active: "active";
 				case Success: "success";
 				case Warning: "warning";
@@ -121,7 +121,7 @@ class TableCell extends ETableCell {
 		super();
 		
 		if (emphasis != null) {
-			classes(switch (emphasis) {
+			addClass(switch (emphasis) {
 				case Active: "active";
 				case Success: "success";
 				case Warning: "warning";

@@ -39,25 +39,25 @@ class Panel extends EDiv {
 		
 		if (type == null) type = Default;
 		
-		classes("panel");
+		addClass("panel");
 		switch (type) {
-			case Default: classes("panel-default");
-			case Primary: classes("panel-primary");
-			case Success: classes("panel-success");
-			case Info: classes("panel-info");
-			case Warning: classes("panel-warning");
-			case Danger: classes("panel-danger");
+			case Default: addClass("panel-default");
+			case Primary: addClass("panel-primary");
+			case Success: addClass("panel-success");
+			case Info: addClass("panel-info");
+			case Warning: addClass("panel-warning");
+			case Danger: addClass("panel-danger");
 		}
 		
-		body = new EDiv().classes("panel-body");
+		body = new EDiv().addClass("panel-body");
 		
-		add(body);
+		append(body);
 	}
 	
 	function get_header ():EDiv {
 		if (header == null) {
 			header = new EDiv();
-			header.classes("panel-heading");
+			header.addClass("panel-heading");
 			node.insertBefore(header.node, body.node);
 		}
 		
@@ -67,8 +67,8 @@ class Panel extends EDiv {
 	function get_footer ():EDiv {
 		if (footer == null) {
 			footer = new EDiv();
-			footer.classes("panel-footer");
-			add(footer);
+			footer.addClass("panel-footer");
+			append(footer);
 		}
 		
 		return footer;

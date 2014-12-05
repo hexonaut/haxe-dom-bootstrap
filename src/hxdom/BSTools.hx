@@ -132,7 +132,7 @@ class BSTools {
 	 * Make this element into a container.
 	 */
 	public static function container<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("container");
+		e.addClass("container");
 		
 		return e;
 	}
@@ -141,7 +141,7 @@ class BSTools {
 	 * Make this element into a grid row.
 	 */
 	public static function row<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("row");
+		e.addClass("row");
 		
 		return e;
 	}
@@ -150,7 +150,7 @@ class BSTools {
 	 * Extra small column.
 	 */
 	public static function xs<T:VirtualElement<Dynamic>> (e:T, cols:Int):T {
-		e.classes("col-xs-" + cols);
+		e.addClass("col-xs-" + cols);
 		
 		return e;
 	}
@@ -159,7 +159,7 @@ class BSTools {
 	 * Small column.
 	 */
 	public static function sm<T:VirtualElement<Dynamic>> (e:T, cols:Int):T {
-		e.classes("col-sm-" + cols);
+		e.addClass("col-sm-" + cols);
 		
 		return e;
 	}
@@ -168,7 +168,7 @@ class BSTools {
 	 * Medium column.
 	 */
 	public static function md<T:VirtualElement<Dynamic>> (e:T, cols:Int):T {
-		e.classes("col-md-" + cols);
+		e.addClass("col-md-" + cols);
 		
 		return e;
 	}
@@ -177,7 +177,7 @@ class BSTools {
 	 * Large column.
 	 */
 	public static function lg<T:VirtualElement<Dynamic>> (e:T, cols:Int):T {
-		e.classes("col-lg-" + cols);
+		e.addClass("col-lg-" + cols);
 		
 		return e;
 	}
@@ -186,7 +186,7 @@ class BSTools {
 	 * Extra small column offset.
 	 */
 	public static function xsoff<T:VirtualElement<Dynamic>> (e:T, cols:Int):T {
-		e.classes("col-xs-offset-" + cols);
+		e.addClass("col-xs-offset-" + cols);
 		
 		return e;
 	}
@@ -195,7 +195,7 @@ class BSTools {
 	 * Small column offset.
 	 */
 	public static function smoff<T:VirtualElement<Dynamic>> (e:T, cols:Int):T {
-		e.classes("col-sm-offset-" + cols);
+		e.addClass("col-sm-offset-" + cols);
 		
 		return e;
 	}
@@ -204,7 +204,7 @@ class BSTools {
 	 * Medium column offset.
 	 */
 	public static function mdoff<T:VirtualElement<Dynamic>> (e:T, cols:Int):T {
-		e.classes("col-md-offset-" + cols);
+		e.addClass("col-md-offset-" + cols);
 		
 		return e;
 	}
@@ -213,7 +213,7 @@ class BSTools {
 	 * Large column offset.
 	 */
 	public static function lgoff<T:VirtualElement<Dynamic>> (e:T, cols:Int):T {
-		e.classes("col-lg-offset-" + cols);
+		e.addClass("col-lg-offset-" + cols);
 		
 		return e;
 	}
@@ -222,7 +222,7 @@ class BSTools {
 	 * Leading paragraph. Make this one stand out.
 	 */
 	public static function lead<T:EParagraph> (e:T):T {
-		e.classes("lead");
+		e.addClass("lead");
 		
 		return e;
 	}
@@ -231,7 +231,7 @@ class BSTools {
 	 * Text align.
 	 */
 	public static function textAlign<T:VirtualElement<Dynamic>> (e:T, align:TextAlign):T {
-		e.classes(switch (align) {
+		e.addClass(switch (align) {
 			case Left: "text-left";
 			case Center: "text-center";
 			case Right: "text-right";
@@ -244,7 +244,7 @@ class BSTools {
 	 * Apply different colors to text for emphasis.
 	 */
 	public static function emphasis<T:VirtualElement<Dynamic>> (e:T, type:TextEmphasis):T {
-		e.classes(switch (type) {
+		e.addClass(switch (type) {
 			case Muted: "text-muted";
 			case Primary: "text-primary";
 			case Success: "text-success";
@@ -260,7 +260,7 @@ class BSTools {
 	 * An abbreviation with a slightly smaller font size.
 	 */
 	public static function initialism<T:EAbbr> (e:T):T {
-		e.classes("initialism");
+		e.addClass("initialism");
 		
 		return e;
 	}
@@ -269,7 +269,7 @@ class BSTools {
 	 * Remove default styling from a list.
 	 */
 	public static function unstyled<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("list-unstyled");
+		e.addClass("list-unstyled");
 		
 		return e;
 	}
@@ -282,7 +282,7 @@ class BSTools {
 	 * 		form
 	 */
 	public static function horizontal<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes(e.node.tagName.toLowerCase() + "-horizontal");
+		e.addClass(e.node.tagName.toLowerCase() + "-horizontal");
 		
 		return e;
 	}
@@ -291,7 +291,7 @@ class BSTools {
 	 * Make a pre scrollable.
 	 */
 	public static function scrollable<T:EPre> (e:T):T {
-		e.classes("pre-scrollable");
+		e.addClass("pre-scrollable");
 		
 		return e;
 	}
@@ -307,7 +307,7 @@ class BSTools {
 	 * 		input[radio]
 	 */
 	public static function inLine<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes(switch (e.node.tagName.toLowerCase()) {
+		e.addClass(switch (e.node.tagName.toLowerCase()) {
 			case "form": "form-inline";
 			case "ul", "ol": "list-inline";
 			case "input":
@@ -326,7 +326,7 @@ class BSTools {
 	 * Group multiple elements into one form item.
 	 */
 	public static function formGroup<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("form-group");
+		e.addClass("form-group");
 		
 		return e;
 	}
@@ -335,7 +335,7 @@ class BSTools {
 	 * Makes a form element stretch to 100% width.
 	 */
 	public static function formControl<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("form-control");
+		e.addClass("form-control");
 		
 		return e;
 	}
@@ -344,7 +344,7 @@ class BSTools {
 	 * Non-editable input.
 	 */
 	public static function formControlStatic<T:EParagraph> (e:T):T {
-		e.classes("form-control-static");
+		e.addClass("form-control-static");
 		
 		return e;
 	}
@@ -353,7 +353,7 @@ class BSTools {
 	 * A help block.
 	 */
 	public static function help<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("help-block");
+		e.addClass("help-block");
 		
 		return e;
 	}
@@ -363,7 +363,7 @@ class BSTools {
 	 * Does not display.
 	 */
 	public static function screenReaderOnly<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("sr-only");
+		e.addClass("sr-only");
 		
 		return e;
 	}
@@ -373,12 +373,12 @@ class BSTools {
 	 * Will remove any previous validation states.
 	 */
 	public static function validation<T:VirtualElement<Dynamic>> (e:T, state:ValidationState):T {
-		e.removeClasses("has-success has-warning has-error");
+		e.removeClass("has-success has-warning has-error");
 		switch (state) {
 			case Regular:
-			case Success: e.classes("has-success");
-			case Warning: e.classes("has-warning");
-			case Error: e.classes("has-error");
+			case Success: e.addClass("has-success");
+			case Warning: e.addClass("has-warning");
+			case Error: e.addClass("has-error");
 		};
 		
 		return e;
@@ -389,9 +389,9 @@ class BSTools {
 	 */
 	public static function inputSize<T:VirtualElement<Dynamic>> (e:T, size:InputSize):T {
 		switch (size) {
-			case Small: e.classes("input-sm");
+			case Small: e.addClass("input-sm");
 			case Medium:
-			case Large: e.classes("input-lg");
+			case Large: e.addClass("input-lg");
 		};
 		
 		return e;
@@ -409,8 +409,8 @@ class BSTools {
 	public static function button<T:VirtualElement<Dynamic>> (e:T, ?type:BSButtonType, ?size:ButtonSize):T {
 		if (type == null) type = Default;
 		
-		e.classes("btn");
-		e.classes(switch (type) {
+		e.addClass("btn");
+		e.addClass(switch (type) {
 			case Default: "btn-default";
 			case Primary: "btn-primary";
 			case Success: "btn-success";
@@ -421,10 +421,10 @@ class BSTools {
 		});
 		if (size != null) {
 			switch (size) {
-				case ExtraSmall: e.classes("btn-xs");
-				case Small: e.classes("btn-sm");
+				case ExtraSmall: e.addClass("btn-xs");
+				case Small: e.addClass("btn-sm");
 				case Medium:
-				case Large: e.classes("btn-lg");
+				case Large: e.addClass("btn-lg");
 			}
 		}
 		
@@ -441,7 +441,7 @@ class BSTools {
 	 * 		a
 	 */
 	public static function block<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("btn-block");
+		e.addClass("btn-block");
 		
 		return e;
 	}
@@ -450,7 +450,7 @@ class BSTools {
 	 * Set image border style.
 	 */
 	public static function imageBorder<T:EImage> (e:T, border:ImageBorder):T {
-		e.classes(switch (border) {
+		e.addClass(switch (border) {
 			case Rounded: "img-rounded";
 			case Circle: "img-circle";
 			case Thumbnail: "img-thumbnail";
@@ -463,7 +463,7 @@ class BSTools {
 	 * Set image border style.
 	 */
 	public static function clearfix<T:VirtualElement<Dynamic>> (e:T):T {
-		e.classes("clearfix");
+		e.addClass("clearfix");
 		
 		return e;
 	}
@@ -472,7 +472,7 @@ class BSTools {
 	 * Set image border style.
 	 */
 	public static function visible<T:VirtualElement<Dynamic>> (e:T, size:DeviceSize):T {
-		e.classes(switch (size) {
+		e.addClass(switch (size) {
 			case ExtraSmall: "visible-xs";
 			case Small: "visible-sm";
 			case Medium: "visible-md";
@@ -486,7 +486,7 @@ class BSTools {
 	 * Set image border style.
 	 */
 	public static function hidden<T:VirtualElement<Dynamic>> (e:T, size:DeviceSize):T {
-		e.classes(switch (size) {
+		e.addClass(switch (size) {
 			case ExtraSmall: "hidden-xs";
 			case Small: "hidden-sm";
 			case Medium: "hidden-md";
@@ -503,7 +503,7 @@ class BSTools {
 		if (align == null) align = Regular;
 		
 		if (align != null) {
-			e.classes(switch (align) {
+			e.addClass(switch (align) {
 				case Regular: "btn-group";
 				case Vertical: "btn-group-vertical";
 				case Justified: "btn-group btn-group-justified";
@@ -511,13 +511,13 @@ class BSTools {
 		}
 		if (size != null) {
 			switch (size) {
-				case ExtraSmall: e.classes("btn-group-xs");
-				case Small: e.classes("btn-group-sm");
+				case ExtraSmall: e.addClass("btn-group-xs");
+				case Small: e.addClass("btn-group-sm");
 				case Medium:
-				case Large: e.classes("btn-group-lg");
+				case Large: e.addClass("btn-group-lg");
 			};
 		}
-		if (dropup) e.classes("dropup");
+		if (dropup) e.addClass("dropup");
 		
 		return e;
 	}
@@ -526,7 +526,7 @@ class BSTools {
 	 * Makes element into a dropdown menu.
 	 */
 	public static function dropdown<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("dropdown");
+		e.addClass("dropdown");
 		
 		return e;
 	}
@@ -535,7 +535,7 @@ class BSTools {
 	 * Links a button to a toggle the dropdown menu within this button group.
 	 */
 	public static function dropdownButton<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("dropdown-toggle");
+		e.addClass("dropdown-toggle");
 		untyped e.node.dataset.toggle = "dropdown";
 		
 		return e;
@@ -545,7 +545,7 @@ class BSTools {
 	 * Turns this span element into a caret character.
 	 */
 	public static function addCaret<T:VirtualElement<Dynamic>>(e:T):T {
-		e.add(new ESpan().classes("caret"));
+		e.append(new ESpan().addClass("caret"));
 		
 		return e;
 	}
@@ -554,7 +554,7 @@ class BSTools {
 	 * Float left.
 	 */
 	public static function pullLeft<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("pull-left");
+		e.addClass("pull-left");
 		
 		return e;
 	}
@@ -563,7 +563,7 @@ class BSTools {
 	 * Float right.
 	 */
 	public static function pullRight<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("pull-right");
+		e.addClass("pull-right");
 		
 		return e;
 	}
@@ -574,11 +574,11 @@ class BSTools {
 	public static function inputGroup<T:VirtualElement<Dynamic>>(e:T, ?size:InputSize):T {
 		if (size == null) size = Medium;
 		
-		e.classes("input-group");
+		e.addClass("input-group");
 		switch (size) {
-			case Small: e.classes("input-group-sm");
+			case Small: e.addClass("input-group-sm");
 			case Medium: 
-			case Large: e.classes("input-group-lg");
+			case Large: e.addClass("input-group-lg");
 		}
 		
 		return e;
@@ -588,7 +588,7 @@ class BSTools {
 	 * Input group addon.
 	 */
 	public static function inputGroupAddon<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("input-group-addon");
+		e.addClass("input-group-addon");
 		
 		return e;
 	}
@@ -597,7 +597,7 @@ class BSTools {
 	 * Input group addon.
 	 */
 	public static function inputGroupButtonAddon<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("input-group-btn");
+		e.addClass("input-group-btn");
 		
 		return e;
 	}
@@ -606,19 +606,19 @@ class BSTools {
 	 * Create a navigation list.
 	 */
 	public static function nav<T:VirtualElement<Dynamic>>(e:T, ?style:NavStyle, ?align:NavAlign):T {
-		e.classes("nav");
+		e.addClass("nav");
 		if (style != null) {
 			switch (style) {
 				case Regular:
-				case Tabs: e.classes("nav-tabs");
-				case Pills: e.classes("nav-pills");
+				case Tabs: e.addClass("nav-tabs");
+				case Pills: e.addClass("nav-pills");
 			}
 		}
 		if (align != null) {
 			switch (align) {
 				case Regular:
-				case Stacked: e.classes("nav-stacked");
-				case Justified: e.classes("nav-justified");
+				case Stacked: e.addClass("nav-stacked");
+				case Justified: e.addClass("nav-justified");
 			}
 		}
 		
@@ -629,9 +629,9 @@ class BSTools {
 	 * Primary navigation.
 	 */
 	public static function navbar<T:ENav>(e:T, ?style:NavBarStyle, ?align:NavBarAlign):T {
-		e.classes("navbar");
+		e.addClass("navbar");
 		if (style != null) {
-			e.classes(switch (style) {
+			e.addClass(switch (style) {
 				case Default: "navbar-default";
 				case Inverse: "navbar-inverse";
 			});
@@ -639,9 +639,9 @@ class BSTools {
 		if (align != null) {
 			switch (align) {
 				case Regular:
-				case FixedTop: e.classes("navbar-fixed-top");
-				case FixedBottom: e.classes("navbar-fixed-bottom");
-				case StaticTop: e.classes("navbar-static-top");
+				case FixedTop: e.addClass("navbar-fixed-top");
+				case FixedBottom: e.addClass("navbar-fixed-bottom");
+				case StaticTop: e.addClass("navbar-static-top");
 			}
 		}
 		
@@ -652,7 +652,7 @@ class BSTools {
 	 * The website brand.
 	 */
 	public static function brand<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("navbar-brand");
+		e.addClass("navbar-brand");
 		
 		return e;
 	}
@@ -672,7 +672,7 @@ class BSTools {
 	 * 		form
 	 */
 	public static function navbarElement<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes(switch (e.node.tagName.toLowerCase()) {
+		e.addClass(switch (Reflect.getProperty(e.node, "tagName").toLowerCase()) {
 			case "form": "navbar-form";
 			case "ul", "ol": "navbar-nav";
 			case "button": "navbar-btn";
@@ -693,7 +693,7 @@ class BSTools {
 	 * Navbar float left.
 	 */
 	public static function navbarLeft<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("navbar-left");
+		e.addClass("navbar-left");
 		
 		return e;
 	}
@@ -702,7 +702,7 @@ class BSTools {
 	 * Navbar float right.
 	 */
 	public static function navbarRight<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("navbar-right");
+		e.addClass("navbar-right");
 		
 		return e;
 	}
@@ -711,7 +711,7 @@ class BSTools {
 	 * Add an icon to an element.
 	 */
 	public static function addIcon<T:VirtualElement<Dynamic>>(e:T, type:IconType):T {
-		e.add(new Icon(type));
+		e.append(new Icon(type));
 		
 		return e;
 	}
@@ -724,7 +724,7 @@ class BSTools {
 	 * 		ol
 	 */
 	public static function breadcrumbs<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("breadcrumb");
+		e.addClass("breadcrumb");
 		
 		return e;
 	}
@@ -733,7 +733,7 @@ class BSTools {
 	 * The active element in a list.
 	 */
 	public static function active<T:EListItem>(e:T):T {
-		e.classes("active");
+		e.addClass("active");
 		
 		return e;
 	}
@@ -743,8 +743,8 @@ class BSTools {
 	 */
 	public static function disabled<T:VirtualElement<Dynamic>>(e:T):T {
 		switch (e.node.tagName.toLowerCase()) {
-			case "button", "command", "fieldset", "input", "keygen", "optgroup", "option", "select", "textarea": e.unsafeAttr("disabled", true);
-			default: e.classes("disabled");
+			case "button", "command", "fieldset", "input", "keygen", "optgroup", "option", "select", "textarea": e.setAttr("disabled", true);
+			default: e.addClass("disabled");
 		}
 		
 		return e;
@@ -758,12 +758,12 @@ class BSTools {
 	 * 		ol
 	 */
 	public static function pagination<T:VirtualElement<Dynamic>>(e:T, ?size:PaginationSize):T {
-		e.classes("pagination");
+		e.addClass("pagination");
 		if (size != null) {
 			switch (size) {
-				case Small: e.classes("pagination-sm");
+				case Small: e.addClass("pagination-sm");
 				case Medium: 
-				case Large: e.classes("pagination-lg");
+				case Large: e.addClass("pagination-lg");
 			}
 		}
 		
@@ -778,7 +778,7 @@ class BSTools {
 	 * 		ol
 	 */
 	public static function pager<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("pager");
+		e.addClass("pager");
 		
 		return e;
 	}
@@ -787,7 +787,7 @@ class BSTools {
 	 * The previous link in a pager.
 	 */
 	public static function previous<T:EListItem>(e:T):T {
-		e.classes("previous");
+		e.addClass("previous");
 		
 		return e;
 	}
@@ -796,7 +796,7 @@ class BSTools {
 	 * The next link in a pager.
 	 */
 	public static function next<T:EListItem>(e:T):T {
-		e.classes("next");
+		e.addClass("next");
 		
 		return e;
 	}
@@ -805,7 +805,7 @@ class BSTools {
 	 * Call extra attention to this element by making it HUGE.
 	 */
 	public static function jumbotron<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("jumbotron");
+		e.addClass("jumbotron");
 		
 		return e;
 	}
@@ -814,7 +814,7 @@ class BSTools {
 	 * Often used on the title of an article or page.
 	 */
 	public static function pageHeader<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("page-header");
+		e.addClass("page-header");
 		
 		return e;
 	}
@@ -823,7 +823,7 @@ class BSTools {
 	 * Turn an element into a thumbnail.
 	 */
 	public static function thumbnail<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("thumbnail");
+		e.addClass("thumbnail");
 		
 		return e;
 	}
@@ -832,7 +832,7 @@ class BSTools {
 	 * Match the color of the parent alert container.
 	 */
 	public static function alertLink<T:EAnchor>(e:T):T {
-		e.classes("alert-link");
+		e.addClass("alert-link");
 		
 		return e;
 	}
@@ -841,12 +841,12 @@ class BSTools {
 	 * Put the element in a well.
 	 */
 	public static function well<T:VirtualElement<Dynamic>>(e:T, ?size:WellSize):T {
-		e.classes("well");
+		e.addClass("well");
 		if (size != null) {
 			switch (size) {
-				case Small: e.classes("well-sm");
+				case Small: e.addClass("well-sm");
 				case Medium:
-				case Large: e.classes("well-lg");
+				case Large: e.addClass("well-lg");
 			}
 		}
 		
@@ -857,7 +857,7 @@ class BSTools {
 	 * Turn a list into a list group.
 	 */
 	public static function listGroup<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("list-group");
+		e.addClass("list-group");
 		
 		return e;
 	}
@@ -866,7 +866,7 @@ class BSTools {
 	 * An item in a list group.
 	 */
 	public static function listGroupItem<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("list-group-item");
+		e.addClass("list-group-item");
 		
 		return e;
 	}
@@ -875,7 +875,7 @@ class BSTools {
 	 * A media object.
 	 */
 	public static function media<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("media");
+		e.addClass("media");
 		
 		return e;
 	}
@@ -884,7 +884,7 @@ class BSTools {
 	 * The image associated with the media object.
 	 */
 	public static function mediaObject<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("media-object");
+		e.addClass("media-object");
 		
 		return e;
 	}
@@ -893,7 +893,7 @@ class BSTools {
 	 * The body of the media object.
 	 */
 	public static function mediaBody<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("media-body");
+		e.addClass("media-body");
 		
 		return e;
 	}
@@ -902,7 +902,7 @@ class BSTools {
 	 * A media object heading.
 	 */
 	public static function mediaHeading<T:VirtualElement<Dynamic>>(e:T):T {
-		e.classes("media-heading");
+		e.addClass("media-heading");
 		
 		return e;
 	}
