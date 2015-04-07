@@ -282,7 +282,7 @@ class BSTools {
 	 * 		form
 	 */
 	public static function horizontal<T:VirtualElement<Dynamic>> (e:T):T {
-		e.addClass(e.node.tagName.toLowerCase() + "-horizontal");
+		e.addClass(Reflect.getProperty(e.node, "tagName").toLowerCase() + "-horizontal");
 		
 		return e;
 	}
@@ -307,7 +307,7 @@ class BSTools {
 	 * 		input[radio]
 	 */
 	public static function inLine<T:VirtualElement<Dynamic>> (e:T):T {
-		e.addClass(switch (e.node.tagName.toLowerCase()) {
+		e.addClass(switch (Reflect.getProperty(e.node, "tagName").toLowerCase()) {
 			case "form": "form-inline";
 			case "ul", "ol": "list-inline";
 			case "input":
@@ -742,7 +742,7 @@ class BSTools {
 	 * Disable an element. Behaviour varies depending on the element.
 	 */
 	public static function disabled<T:VirtualElement<Dynamic>>(e:T):T {
-		switch (e.node.tagName.toLowerCase()) {
+		switch (Reflect.getProperty(e.node, "tagName").toLowerCase()) {
 			case "button", "command", "fieldset", "input", "keygen", "optgroup", "option", "select", "textarea": e.setAttr("disabled", true);
 			default: e.addClass("disabled");
 		}
